@@ -5,9 +5,9 @@ import Version from './page/Version/Version';
 
 const AppRoutes = () => (
   <Routes>
-    <Route path={Page.MyTsum} element={<MyTsum />} />
-    <Route path={Page.Version} element={<Version />} />
-    <Route path="/*" element={<Navigate to={Page.MyTsum} />} />
+    <Route path={`/alpheratz/${Page.MyTsum}`} element={<MyTsum />} />
+    <Route path={`/alpheratz/${Page.Version}`} element={<Version />} />
+    <Route path="/alpheratz/*" element={<Navigate to={Page.MyTsum} />} />
   </Routes>
 );
 
