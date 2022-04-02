@@ -1,4 +1,5 @@
 export enum Page {
-  MyTsum = 'my-tsum',
-  Version = 'version',
+  MyTsum = 'alpheratz/my-tsum',
+  Version = 'alpheratz/version',
+  Default = 'alpheratz/*',
 }
