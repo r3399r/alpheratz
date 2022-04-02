@@ -1,6 +1,7 @@
 import { Button, MenuItem, Menu as MuiMenu } from '@mui/material';
 import classNames from 'classnames';
 import { Dispatch, MouseEvent, SetStateAction, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import style from './Menu.module.scss';
 
 type MenuProps = {
@@ -11,6 +12,7 @@ type MenuProps = {
 };
 
 const Menu = ({ label, values, selected, setSelected }: MenuProps) => {
+  const { t } = useTranslation();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
@@ -24,6 +26,7 @@ const Menu = ({ label, values, selected, setSelected }: MenuProps) => {
     else setSelected((prev) => new Set(prev.add(v)));
     handleClose();
   };
+  const items = values.map((v) => ({ label: t(`filter.${v}`), value: v }));
 
   return (
     <>
@@ -31,13 +34,13 @@ const Menu = ({ label, values, selected, setSelected }: MenuProps) => {
         {label}
       </Button>
       <MuiMenu anchorEl={anchorEl} open={open} onClose={handleClose}>
-        {values.map((v) => (
+        {items.map((v) => (
           <MenuItem
-            className={classNames({ [style.item]: selected.has(v) })}
-            key={v}
-            onClick={handleItemClick(v)}
+            className={classNames({ [style.item]: selected.has(v.value) })}
+            key={v.value}
+            onClick={handleItemClick(v.value)}
           >
-            {v}
+            {v.label}
           </MenuItem>
         ))}
       </MuiMenu>

@@ -1,0 +1,25 @@
+{
+  "navbar": {
+    "myTsum": "My Tsum",
+    "version": "Version Info",
+    "language": "Language"
+  },
+  "filter": {
+    "color": "Color",
+    "appearance": "Appearance",
+    "attire": "Attire",
+    "skill": "Skill",
+
+    "gender": "Gender",
+    "female": "Female",
+    "male": "Male",
+    "unknown": "Unknown",
+
+    "box": "Box",
+    "other": "Other",
+    "character": "Character",
+    "initial": "Initial",
+    "series": "Series",
+    "clear": "Clear"
+  }
+}

@@ -1,5 +1,6 @@
 import { Button, Chip } from '@mui/material';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import Menu from 'src/component/Menu';
 import {
   Appearance,
@@ -18,6 +19,7 @@ import { getTsumsWithFilter } from 'src/service/TsumService';
 import style from './MyTsum.module.scss';
 
 const MyTsum = () => {
+  const { t } = useTranslation();
   const [tsums, setTsums] = useState<Tsum[]>([]);
   const [color, setColor] = useState<Set<string>>(new Set());
   const [appearance, setAppearance] = useState<Set<string>>(new Set());
@@ -66,53 +68,73 @@ const MyTsum = () => {
   return (
     <>
       <div className={style.menu}>
-        <Menu label="Color" values={Object.values(Color)} selected={color} setSelected={setColor} />
         <Menu
-          label="Appearance"
+          label={t('filter.color')}
+          values={Object.values(Color)}
+          selected={color}
+          setSelected={setColor}
+        />
+        <Menu
+          label={t('filter.appearance')}
           values={Object.values(Appearance)}
           selected={appearance}
           setSelected={setAppearance}
         />
         <Menu
-          label="Attire"
+          label={t('filter.attire')}
           values={Object.values(Attire)}
           selected={attire}
           setSelected={setAttire}
         />
-        <Menu label="Skill" values={Object.values(Skill)} selected={skill} setSelected={setSkill} />
         <Menu
-          label="Gender"
+          label={t('filter.skill')}
+          values={Object.values(Skill)}
+          selected={skill}
+          setSelected={setSkill}
+        />
+        <Menu
+          label={t('filter.gender')}
           values={Object.values(Gender)}
           selected={gender}
           setSelected={setGender}
         />
-        <Menu label="Box" values={Object.values(Box)} selected={box} setSelected={setBox} />
-        <Menu label="Other" values={Object.values(Other)} selected={other} setSelected={setOther} />
         <Menu
-          label="Character"
+          label={t('filter.box')}
+          values={Object.values(Box)}
+          selected={box}
+          setSelected={setBox}
+        />
+        <Menu
+          label={t('filter.other')}
+          values={Object.values(Other)}
+          selected={other}
+          setSelected={setOther}
+        />
+        <Menu
+          label={t('filter.character')}
           values={Object.values(Character)}
           selected={character}
           setSelected={setCharacter}
         />
         <Menu
-          label="Initial"
+          label={t('filter.initial')}
           values={Object.values(Initial)}
           selected={initial}
           setSelected={setInitial}
         />
         <Menu
-          label="Series"
+          label={t('filter.series')}
           values={Object.values(Series)}
           selected={series}
           setSelected={setSeries}
         />
         <Button variant="outlined" color="error" onClick={onClear}>
-          Clear
+          {t('filter.clear')}
         </Button>
       </div>
       <div className={style.chip}>
         {[...color].map((v) => (
-          <Chip key={v} label={v} onDelete={onDelete(v, setColor)} />
+          <Chip key={v} label={t(`filter.${v}`)} onDelete={onDelete(v, setColor)} />
         ))}
         {[...appearance].map((v) => (
           <Chip key={v} label={v} onDelete={onDelete(v, setAppearance)} />
@@ -124,7 +146,7 @@ const MyTsum = () => {
           <Chip key={v} label={v} onDelete={onDelete(v, setSkill)} />
         ))}
         {[...gender].map((v) => (
-          <Chip key={v} label={v} onDelete={onDelete(v, setGender)} />
+          <Chip key={v} label={t(`filter.${v}`)} onDelete={onDelete(v, setGender)} />
         ))}
         {[...box].map((v) => (
           <Chip key={v} label={v} onDelete={onDelete(v, setBox)} />

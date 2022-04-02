@@ -1,0 +1,25 @@
+{
+  "navbar": {
+    "myTsum": "我的Tsum",
+    "version": "版本資訊",
+    "language": "語言"
+  },
+  "filter": {
+    "color": "顏色",
+    "appearance": "外觀",
+    "attire": "穿著",
+    "skill": "技能",
+
+    "gender": "性別",
+    "female": "女生",
+    "male": "男生",
+    "unknown": "未知",
+
+    "box": "盒子",
+    "other": "其他",
+    "character": "角色",
+    "initial": "開頭",
+    "series": "系列",
+    "clear": "清除"
+  }
+}
