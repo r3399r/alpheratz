@@ -1,0 +1,7 @@
+.self {
+  padding: 10px;
+  > div {
+    display: flex;
+    gap: 10px;
+  }
+}
