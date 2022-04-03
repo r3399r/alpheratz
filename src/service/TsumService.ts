@@ -1,8 +1,45 @@
+import { AliceInWonderland } from 'src/model/AliceInWonderland';
+import { Bambi } from 'src/model/Bambi';
 import { ChipAndDale } from 'src/model/ChipAndDale';
+import { Dumbo } from 'src/model/Dumbo';
+import { Frozen } from 'src/model/Frozen';
+import { LadyAndTheTramp } from 'src/model/LadyAndTheTramp';
+import { LiloAndStitch } from 'src/model/LiloAndStitch';
+import { LittleMermaid } from 'src/model/LittleMermaid';
+import { Maleficent } from 'src/model/Maleficent';
 import { MickeyAndFriends } from 'src/model/MickeyAndFriends';
+import { MonstersInc } from 'src/model/MonstersInc';
+import { OswaldTheLuckyRabbit } from 'src/model/OswaldTheLuckyRabbit';
+import { PeterPan } from 'src/model/PeterPan';
+import { PhineasAndFerb } from 'src/model/PhineasAndFerb';
+import { Tangled } from 'src/model/Tangled';
+import { TheAristocats } from 'src/model/TheAristocats';
+import { TheNightmareBeforeChristmas } from 'src/model/TheNightmareBeforeChristmas';
+import { ToyStory } from 'src/model/ToyStory';
 import { Tsum } from 'src/model/Tsum';
+import { WinnieThePooh } from 'src/model/WinnieThePooh';
 
-export const tsumList: Tsum[] = [...MickeyAndFriends, ...ChipAndDale];
+const tsumList: Tsum[] = [
+  ...MickeyAndFriends,
+  ...ChipAndDale,
+  ...WinnieThePooh,
+  ...LiloAndStitch,
+  ...TheAristocats,
+  ...LadyAndTheTramp,
+  ...PhineasAndFerb,
+  ...OswaldTheLuckyRabbit,
+  ...TheNightmareBeforeChristmas,
+  ...ToyStory,
+  ...MonstersInc,
+  ...Dumbo,
+  ...AliceInWonderland,
+  ...PeterPan,
+  ...Bambi,
+  ...Frozen,
+  ...Maleficent,
+  ...LittleMermaid,
+  ...Tangled,
+];
 
 export const getTsumsWithFilter = (filter: {
   color: string[];

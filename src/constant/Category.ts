@@ -66,6 +66,7 @@ export enum Skill {
   CallFriend = 'callFriend',
   CallLover = 'callLover',
   CallMyTsum = 'callMyTsum',
+  CallOthers = 'callOthers',
 
   MakeBatsAppear = 'makeBatsAppear',
   MakeBigTsum = 'makeBigTsum',
@@ -94,16 +95,17 @@ export enum Box {
 }
 
 export enum Other {
-  ThreeEyedAlien = 'threeEyedAlien',
   Dog = 'dog',
   Cat = 'cat',
+  Rabbit = 'rabbit',
   Halloween = 'halloween',
   Holiday = 'holiday',
   Marine = 'marine',
   Prince = 'prince',
   Princess = 'princess',
-  Rabbit = 'rabbit',
   Villain = 'villain',
+  Pixar = 'pixar',
+  ThreeEyedAlien = 'threeEyedAlien',
 }
 
 export enum MickeyAndFriends {
@@ -194,7 +196,7 @@ export enum Series {
   ToyStory = 'toyStory',
   Up = 'up',
   WallE = 'wallE',
-  WinneThePooh = 'winneThePooh',
+  WinnieThePooh = 'winnieThePooh',
   WreckItRalph = 'wreckItRalph',
   Zootopia = 'zootopia',
 }

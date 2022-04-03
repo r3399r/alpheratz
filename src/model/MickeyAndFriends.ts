@@ -13,6 +13,7 @@ import {
 import { BaseTsum, Tsum } from './Tsum';
 
 class MickeyAndFriendsTsum extends BaseTsum implements Tsum {
+  id: number;
   name: string;
   url: string;
   color?: C[];
@@ -26,6 +27,7 @@ class MickeyAndFriendsTsum extends BaseTsum implements Tsum {
 
   constructor(tsum: Omit<Tsum, 'series'>) {
     super(Series.MickeyAndFriends);
+    this.id = tsum.id;
     this.name = tsum.name;
     this.url = tsum.url;
     this.box = tsum.box;
@@ -42,6 +44,7 @@ class MickeyAndFriendsTsum extends BaseTsum implements Tsum {
 
 export const MickeyAndFriends: Tsum[] = [
   new MickeyAndFriendsTsum({
+    id: 1,
     name: 'mickey',
     url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/d/d9/Mickey.png',
     box: B.Happiness,
@@ -53,6 +56,7 @@ export const MickeyAndFriends: Tsum[] = [
     initial: [I.M],
   }),
   new MickeyAndFriendsTsum({
+    id: 2,
     name: 'minnie',
     url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/6/66/Minnie.png',
     box: B.Happiness,
@@ -65,6 +69,7 @@ export const MickeyAndFriends: Tsum[] = [
     initial: [I.M],
   }),
   new MickeyAndFriendsTsum({
+    id: 3,
     name: 'donald',
     url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/6/6f/Donald.png',
     box: B.Happiness,
@@ -76,6 +81,7 @@ export const MickeyAndFriends: Tsum[] = [
     initial: [I.D],
   }),
   new MickeyAndFriendsTsum({
+    id: 4,
     name: 'daisy',
     url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/c/c1/Daisy.png',
     box: B.Happiness,
@@ -88,6 +94,7 @@ export const MickeyAndFriends: Tsum[] = [
     initial: [I.D],
   }),
   new MickeyAndFriendsTsum({
+    id: 5,
     name: 'goofy',
     url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/e/e5/Goofy.png',
     box: B.Happiness,
@@ -108,6 +115,7 @@ export const MickeyAndFriends: Tsum[] = [
     mickeyAndFriends: [M.Goofy, M.MickeyAndFriends],
   }),
   new MickeyAndFriendsTsum({
+    id: 6,
     name: 'pluto',
     url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/3/35/Pluto.png',
     box: B.Happiness,

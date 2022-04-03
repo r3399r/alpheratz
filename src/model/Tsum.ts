@@ -12,6 +12,7 @@ import {
 } from 'src/constant/Category';
 
 export type Tsum = {
+  id: number;
   name: string;
   url: string;
   series: Series;

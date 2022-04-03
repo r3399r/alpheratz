@@ -13,6 +13,7 @@ import {
 import { BaseTsum, Tsum } from './Tsum';
 
 class ChipAndDaleTsum extends BaseTsum implements Tsum {
+  id: number;
   name: string;
   url: string;
   color?: C[];
@@ -26,6 +27,7 @@ class ChipAndDaleTsum extends BaseTsum implements Tsum {
 
   constructor(tsum: Omit<Tsum, 'series'>) {
     super(Series.ChipAndDale);
+    this.id = tsum.id;
     this.name = tsum.name;
     this.url = tsum.url;
     this.box = tsum.box;
@@ -42,6 +44,7 @@ class ChipAndDaleTsum extends BaseTsum implements Tsum {
 
 export const ChipAndDale: Tsum[] = [
   new ChipAndDaleTsum({
+    id: 7,
     name: 'chip',
     url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/6/6f/Chip.png',
     box: B.Happiness,
@@ -52,6 +55,7 @@ export const ChipAndDale: Tsum[] = [
     mickeyAndFriends: [M.MickeyAndFriends],
   }),
   new ChipAndDaleTsum({
+    id: 8,
     name: 'dale',
     url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/1/19/Dale.png',
     box: B.Happiness,

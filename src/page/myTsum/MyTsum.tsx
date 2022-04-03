@@ -166,9 +166,9 @@ const MyTsum = () => {
       </div>
       <div className={style.tsum}>
         {tsums.map((v) => (
-          <div key={v.name}>
+          <div key={v.id}>
             <img src={v.url} />
-            <div>{v.name}</div>
+            <div>{t(`tsum.${v.name}`)}</div>
           </div>
         ))}
       </div>
