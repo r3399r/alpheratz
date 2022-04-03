@@ -21,8 +21,8 @@ export const getTsumsWithFilter = (filter: {
     .filter((v) => filter.appearance.length === 0 || checker(filter.appearance, v.appearance))
     .filter((v) => filter.wear.length === 0 || checker(filter.wear, v.wear))
     .filter((v) => filter.skill.length === 0 || checker(filter.skill, v.skill))
-    .filter((v) => filter.gender.length === 0 || checker(filter.gender, [v.gender]))
-    .filter((v) => filter.box.length === 0 || checker(filter.box, [v.box]))
+    .filter((v) => filter.gender.length === 0 || checker(filter.gender, v.gender ? [v.gender] : []))
+    .filter((v) => filter.box.length === 0 || checker(filter.box, v.box ? [v.box] : []))
     .filter((v) => filter.other.length === 0 || checker(filter.other, v.other))
     .filter(
       (v) =>

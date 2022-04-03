@@ -19,7 +19,7 @@ class ChipAndDaleTsum extends BaseTsum implements Tsum {
   appearance?: A[];
   wear?: W[];
   skill?: S[];
-  gender: G;
+  gender?: G;
   other?: O[];
   mickeyAndFriends?: M[];
   initial?: I[];

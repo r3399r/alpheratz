@@ -15,8 +15,8 @@ export type Tsum = {
   name: string;
   url: string;
   series: Series;
-  box: Box;
-  gender: Gender;
+  box?: Box;
+  gender?: Gender;
   color?: Color[];
   appearance?: Appearance[];
   wear?: Wear[];
@@ -27,7 +27,7 @@ export type Tsum = {
 };
 
 export class BaseTsum {
-  box: Box;
+  box?: Box;
   series: Series;
   constructor(series: Series) {
     this.box = Box.Premium;
