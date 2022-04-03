@@ -4,15 +4,15 @@ import { useTranslation } from 'react-i18next';
 import Menu from 'src/component/Menu';
 import {
   Appearance,
-  Attire,
   Box,
-  Character,
   Color,
   Gender,
   Initial,
+  MickeyAndFriends,
   Other,
   Series,
   Skill,
+  Wear,
 } from 'src/constant/Category';
 import { Tsum } from 'src/model/Tsum';
 import { getTsumsWithFilter } from 'src/service/TsumService';
@@ -23,12 +23,12 @@ const MyTsum = () => {
   const [tsums, setTsums] = useState<Tsum[]>([]);
   const [color, setColor] = useState<Set<string>>(new Set());
   const [appearance, setAppearance] = useState<Set<string>>(new Set());
-  const [attire, setAttire] = useState<Set<string>>(new Set());
+  const [wear, setWear] = useState<Set<string>>(new Set());
   const [skill, setSkill] = useState<Set<string>>(new Set());
   const [gender, setGender] = useState<Set<string>>(new Set());
   const [box, setBox] = useState<Set<string>>(new Set());
   const [other, setOther] = useState<Set<string>>(new Set());
-  const [character, setCharacter] = useState<Set<string>>(new Set());
+  const [mickeyAndFriends, setMickeyAndFriends] = useState<Set<string>>(new Set());
   const [initial, setInitial] = useState<Set<string>>(new Set());
   const [series, setSeries] = useState<Set<string>>(new Set());
 
@@ -37,27 +37,27 @@ const MyTsum = () => {
       getTsumsWithFilter({
         color: [...color],
         appearance: [...appearance],
-        attire: [...attire],
+        wear: [...wear],
         skill: [...skill],
         gender: [...gender],
         box: [...box],
         other: [...other],
-        character: [...character],
+        mickeyAndFriends: [...mickeyAndFriends],
         initial: [...initial],
         series: [...series],
       }),
     );
-  }, [color, appearance, attire, skill, gender, box, other, character, initial, series]);
+  }, [color, appearance, wear, skill, gender, box, other, mickeyAndFriends, initial, series]);
 
   const onClear = () => {
     setColor(new Set());
     setAppearance(new Set());
-    setAttire(new Set());
+    setWear(new Set());
     setSkill(new Set());
     setGender(new Set());
     setBox(new Set());
     setOther(new Set());
-    setCharacter(new Set());
+    setMickeyAndFriends(new Set());
     setInitial(new Set());
     setSeries(new Set());
   };
@@ -81,10 +81,10 @@ const MyTsum = () => {
           setSelected={setAppearance}
         />
         <Menu
-          label={t('filter.attire')}
-          values={Object.values(Attire)}
-          selected={attire}
-          setSelected={setAttire}
+          label={t('filter.wear')}
+          values={Object.values(Wear)}
+          selected={wear}
+          setSelected={setWear}
         />
         <Menu
           label={t('filter.skill')}
@@ -111,10 +111,10 @@ const MyTsum = () => {
           setSelected={setOther}
         />
         <Menu
-          label={t('filter.character')}
-          values={Object.values(Character)}
-          selected={character}
-          setSelected={setCharacter}
+          label={t('filter.mickeyAndFriends')}
+          values={Object.values(MickeyAndFriends)}
+          selected={mickeyAndFriends}
+          setSelected={setMickeyAndFriends}
         />
         <Menu
           label={t('filter.initial')}
@@ -137,31 +137,31 @@ const MyTsum = () => {
           <Chip key={v} label={t(`filter.${v}`)} onDelete={onDelete(v, setColor)} />
         ))}
         {[...appearance].map((v) => (
-          <Chip key={v} label={v} onDelete={onDelete(v, setAppearance)} />
+          <Chip key={v} label={t(`filter.${v}`)} onDelete={onDelete(v, setAppearance)} />
         ))}
-        {[...attire].map((v) => (
-          <Chip key={v} label={v} onDelete={onDelete(v, setAttire)} />
+        {[...wear].map((v) => (
+          <Chip key={v} label={t(`filter.${v}`)} onDelete={onDelete(v, setWear)} />
         ))}
         {[...skill].map((v) => (
-          <Chip key={v} label={v} onDelete={onDelete(v, setSkill)} />
+          <Chip key={v} label={t(`filter.${v}`)} onDelete={onDelete(v, setSkill)} />
         ))}
         {[...gender].map((v) => (
           <Chip key={v} label={t(`filter.${v}`)} onDelete={onDelete(v, setGender)} />
         ))}
         {[...box].map((v) => (
-          <Chip key={v} label={v} onDelete={onDelete(v, setBox)} />
+          <Chip key={v} label={t(`filter.${v}`)} onDelete={onDelete(v, setBox)} />
         ))}
         {[...other].map((v) => (
-          <Chip key={v} label={v} onDelete={onDelete(v, setOther)} />
+          <Chip key={v} label={t(`filter.${v}`)} onDelete={onDelete(v, setOther)} />
         ))}
-        {[...character].map((v) => (
-          <Chip key={v} label={v} onDelete={onDelete(v, setCharacter)} />
+        {[...mickeyAndFriends].map((v) => (
+          <Chip key={v} label={t(`filter.${v}`)} onDelete={onDelete(v, setMickeyAndFriends)} />
         ))}
         {[...initial].map((v) => (
-          <Chip key={v} label={v} onDelete={onDelete(v, setInitial)} />
+          <Chip key={v} label={t(`filter.${v}`)} onDelete={onDelete(v, setInitial)} />
         ))}
         {[...series].map((v) => (
-          <Chip key={v} label={v} onDelete={onDelete(v, setSeries)} />
+          <Chip key={v} label={t(`filter.${v}`)} onDelete={onDelete(v, setSeries)} />
         ))}
       </div>
       <div className={style.tsum}>

@@ -19,7 +19,7 @@ export enum Appearance {
   NoEars = 'noEars',
   Eared = 'eared',
   FloppyEars = 'floppyEars',
-  PointyEars = 'pontyEars',
+  PointyEars = 'pointyEars',
   RoundEars = 'roundEars',
   PinkEars = 'pinkEars',
 
@@ -42,7 +42,7 @@ export enum Appearance {
   YellowHands = 'yellowHands',
 }
 
-export enum Attire {
+export enum Wear {
   WearRibbon = 'wearRibbon',
   WearCrown = 'wearCrown',
   WearHat = 'wearHat',
@@ -106,7 +106,7 @@ export enum Other {
   Villain = 'villain',
 }
 
-export enum Character {
+export enum MickeyAndFriends {
   Mickey = 'mickey',
   Minnie = 'minnie',
   Donald = 'donald',

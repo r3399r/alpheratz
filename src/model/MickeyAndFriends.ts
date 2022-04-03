@@ -1,28 +1,28 @@
 import {
-  Appearance,
-  Attire,
-  Box,
-  Character,
-  Color,
-  Gender,
-  Initial,
-  Other,
+  Appearance as A,
+  Box as B,
+  Color as C,
+  Gender as G,
+  Initial as I,
+  MickeyAndFriends as M,
+  Other as O,
+  Skill as S,
   Series,
-  Skill,
+  Wear as W,
 } from 'src/constant/Category';
 import { BaseTsum, Tsum } from './Tsum';
 
 class MickeyAndFriendsTsum extends BaseTsum implements Tsum {
   name: string;
   url: string;
-  color?: Color[];
-  appearance?: Appearance[];
-  attire?: Attire[];
-  skill?: Skill[];
-  gender: Gender;
-  other?: Other[];
-  character?: Character[];
-  initial?: Initial[];
+  color?: C[];
+  appearance?: A[];
+  wear?: W[];
+  skill?: S[];
+  gender: G;
+  other?: O[];
+  mickeyAndFriends?: M[];
+  initial?: I[];
 
   constructor(tsum: Omit<Tsum, 'series'>) {
     super(Series.MickeyAndFriends);
@@ -32,103 +32,91 @@ class MickeyAndFriendsTsum extends BaseTsum implements Tsum {
     this.gender = tsum.gender;
     this.color = tsum.color;
     this.appearance = tsum.appearance;
-    this.attire = tsum.attire;
-    this.character = tsum.character;
+    this.wear = tsum.wear;
+    this.skill = tsum.skill;
+    this.other = tsum.other;
+    this.mickeyAndFriends = tsum.mickeyAndFriends;
     this.initial = tsum.initial;
   }
 }
 
 export const MickeyAndFriends: Tsum[] = [
   new MickeyAndFriendsTsum({
-    name: 'Mickey',
+    name: 'mickey',
     url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/d/d9/Mickey.png',
-    box: Box.Happiness,
-    gender: Gender.Male,
-    color: [Color.Black],
-    appearance: [
-      Appearance.Eared,
-      Appearance.RoundEars,
-      Appearance.BlackNose,
-      Appearance.WhiteHands,
-    ],
-    skill: [Skill.Burst, Skill.BurstCenter],
-    character: [Character.Mickey, Character.MickeyAndFriends],
-    initial: [Initial.M],
+    box: B.Happiness,
+    gender: G.Male,
+    color: [C.Black],
+    appearance: [A.Eared, A.RoundEars, A.BlackNose, A.WhiteHands],
+    skill: [S.Burst, S.BurstCenter],
+    mickeyAndFriends: [M.Mickey, M.MickeyAndFriends],
+    initial: [I.M],
   }),
   new MickeyAndFriendsTsum({
-    name: 'Minnie',
+    name: 'minnie',
     url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/6/66/Minnie.png',
-    box: Box.Happiness,
-    gender: Gender.Female,
-    color: [Color.Black],
-    appearance: [
-      Appearance.RoundEars,
-      Appearance.Eared,
-      Appearance.Eyeslashes,
-      Appearance.BlackNose,
-      Appearance.RosyCheeks,
-      Appearance.WhiteHands,
-    ],
-    attire: [Attire.WearRibbon],
-    skill: [Skill.CallSomeone, Skill.CallLover, Skill.MakeHearts],
-    character: [Character.Minnie, Character.MickeyAndFriends],
-    initial: [Initial.M],
+    box: B.Happiness,
+    gender: G.Female,
+    color: [C.Black],
+    appearance: [A.RoundEars, A.Eared, A.Eyeslashes, A.BlackNose, A.RosyCheeks, A.WhiteHands],
+    wear: [W.WearRibbon],
+    skill: [S.CallSomeone, S.CallLover, S.MakeHearts],
+    mickeyAndFriends: [M.Minnie, M.MickeyAndFriends],
+    initial: [I.M],
   }),
   new MickeyAndFriendsTsum({
-    name: 'Donald',
+    name: 'donald',
     url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/6/6f/Donald.png',
-    box: Box.Happiness,
-    gender: Gender.Male,
-    color: [Color.White],
-    appearance: [
-      Appearance.PointyHair,
-      Appearance.NoEars,
-      Appearance.Mouthed,
-      Appearance.Beaked,
-      Appearance.RosyCheeks,
-      Appearance.WhiteHands,
-    ],
-    attire: [Attire.WearRibbon, Attire.WearHat],
-    character: [Character.Donald, Character.MickeyAndFriends],
-    initial: [Initial.D],
+    box: B.Happiness,
+    gender: G.Male,
+    color: [C.White],
+    appearance: [A.PointyHair, A.NoEars, A.Mouthed, A.Beaked, A.RosyCheeks, A.WhiteHands],
+    wear: [W.WearRibbon, W.WearHat],
+    mickeyAndFriends: [M.Donald, M.MickeyAndFriends],
+    initial: [I.D],
   }),
   new MickeyAndFriendsTsum({
-    name: 'Daisy',
+    name: 'daisy',
     url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/c/c1/Daisy.png',
-    box: Box.Happiness,
-    gender: Gender.Female,
-    color: [Color.White],
-    appearance: [
-      Appearance.NoEars,
-      Appearance.Eyeslashes,
-      Appearance.Mouthed,
-      Appearance.Beaked,
-      Appearance.RosyCheeks,
-      Appearance.WhiteHands,
-    ],
-    attire: [Attire.WearRibbon],
-    skill: [Skill.CallSomeone, Skill.CallLover, Skill.MakeHearts],
-    character: [Character.MickeyAndFriends],
-    initial: [Initial.D],
+    box: B.Happiness,
+    gender: G.Female,
+    color: [C.White],
+    appearance: [A.NoEars, A.Eyeslashes, A.Mouthed, A.Beaked, A.RosyCheeks, A.WhiteHands],
+    wear: [W.WearRibbon],
+    skill: [S.CallSomeone, S.CallLover, S.MakeHearts],
+    mickeyAndFriends: [M.MickeyAndFriends],
+    initial: [I.D],
   }),
   new MickeyAndFriendsTsum({
-    name: 'Goofy',
+    name: 'goofy',
     url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/e/e5/Goofy.png',
-    box: Box.Happiness,
-    gender: Gender.Male,
-    color: [Color.Black],
+    box: B.Happiness,
+    gender: G.Male,
+    color: [C.Black],
     appearance: [
-      Appearance.PointyHair,
-      Appearance.ThreeHaired,
-      Appearance.Eared,
-      Appearance.FloppyEars,
-      Appearance.VisibleEyeWhites,
-      Appearance.BlackNose,
-      Appearance.WhiteHands,
+      A.PointyHair,
+      A.ThreeHaired,
+      A.Eared,
+      A.FloppyEars,
+      A.VisibleEyeWhites,
+      A.BlackNose,
+      A.WhiteHands,
     ],
-    attire: [Attire.WearHat],
-    skill: [Skill.Burst, Skill.BurstRandom],
-    other: [Other.Dog],
-    character: [Character.Goofy, Character.MickeyAndFriends],
+    wear: [W.WearHat],
+    skill: [S.Burst, S.BurstRandom],
+    other: [O.Dog],
+    mickeyAndFriends: [M.Goofy, M.MickeyAndFriends],
+  }),
+  new MickeyAndFriendsTsum({
+    name: 'pluto',
+    url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/3/35/Pluto.png',
+    box: B.Happiness,
+    gender: G.Male,
+    color: [C.Yellow],
+    appearance: [A.Eared, A.FloppyEars, A.BlackNose, A.YellowHands],
+    skill: [S.Burst, S.BurstHorizontal],
+    other: [O.Dog],
+    mickeyAndFriends: [M.MickeyAndFriends],
+    initial: [I.P],
   }),
 ];
