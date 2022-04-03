@@ -7,7 +7,7 @@ const AppRoutes = () => (
   <Routes>
     <Route path={Page.MyTsum} element={<MyTsum />} />
     <Route path={Page.Version} element={<Version />} />
-    <Route path={Page.Default} element={<Navigate to={Page.MyTsum} />} />
+    <Route path="/*" element={<Navigate to={Page.MyTsum} />} />
   </Routes>
 );
 
