@@ -36,7 +36,7 @@ init({
     backendOptions: [
       {
         // path where resources get loaded from
-        loadPath: `/alpheratz/locale/{{lng}}/{{ns}}.json`,
+        loadPath: `/locale/{{lng}}/{{ns}}.json`,
       },
     ],
   },

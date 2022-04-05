@@ -3,7 +3,6 @@ import {
   Box as B,
   Color as C,
   Gender as G,
-  Gender,
   Initial as I,
   MickeyAndFriends as M,
   Other as O,
