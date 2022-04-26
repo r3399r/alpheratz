@@ -1,7 +1,7 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { Page } from './constant/Page';
 import MyTsum from './page/myTsum/MyTsum';
-import Version from './page/versions/Version';
+import Version from './page/version/Version';
 
 const AppRoutes = () => (
   <Routes>

@@ -96,4 +96,34 @@ export const AliceInWonderland: Tsum[] = [
     skill: [S.CallSomeone, S.CallMyTsum],
     other: [O.Marine],
   }),
+  new AliceInWonderlandTsum({
+    id: 123,
+    name: 'wonderlandAlice',
+    url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/7/74/WonderlandAlice.png',
+    gender: G.Female,
+  }),
+  new AliceInWonderlandTsum({
+    id: 124,
+    name: 'queenOfHearts',
+    url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/0/01/QueenofHearts.png',
+    gender: G.Female,
+  }),
+  new AliceInWonderlandTsum({
+    id: 125,
+    name: 'madHatter',
+    url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/a/a9/MadHatter.png',
+    gender: G.Male,
+  }),
+  new AliceInWonderlandTsum({
+    id: 126,
+    name: 'marchHare',
+    url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/3/3a/MarchHare.png',
+    gender: G.Male,
+  }),
+  new AliceInWonderlandTsum({
+    id: 127,
+    name: 'theatricalMadHatter',
+    url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/9/99/FashionableMadHatter.png',
+    gender: G.Male,
+  }),
 ];

@@ -88,4 +88,10 @@ export const LittleMermaid: Tsum[] = [
     url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/8/89/Scuttle.png',
     gender: G.Male,
   }),
+  new LittleMermaidTsum({
+    id: 109,
+    name: 'ursula',
+    url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/a/a4/Ursula.png',
+    gender: G.Male,
+  }),
 ];

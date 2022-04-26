@@ -5,9 +5,11 @@ import { BeautyAndTheBeast } from 'src/model/BeautyAndTheBeast';
 import { BigHero6 } from 'src/model/BigHero6';
 import { Cars } from 'src/model/Cars';
 import { ChipAndDale } from 'src/model/ChipAndDale';
+import { Cinderella } from 'src/model/Cinderella';
 import { Dumbo } from 'src/model/Dumbo';
 import { Fantasia } from 'src/model/Fantasia';
 import { Frozen } from 'src/model/Frozen';
+import { JungleBook } from 'src/model/JungleBook';
 import { LadyAndTheTramp } from 'src/model/LadyAndTheTramp';
 import { LiloAndStitch } from 'src/model/LiloAndStitch';
 import { LittleMermaid } from 'src/model/LittleMermaid';
@@ -18,9 +20,14 @@ import { OswaldTheLuckyRabbit } from 'src/model/OswaldTheLuckyRabbit';
 import { PeterPan } from 'src/model/PeterPan';
 import { PhineasAndFerb } from 'src/model/PhineasAndFerb';
 import { Pinocchio } from 'src/model/Pinocchio';
+import { SleepingBeauty } from 'src/model/SleepingBeauty';
+import { SnowWhite } from 'src/model/SnowWhite';
 import { StarWars } from 'src/model/StarWars';
+import { SteamboatWillie } from 'src/model/SteamboatWillie';
 import { Tangled } from 'src/model/Tangled';
 import { TheAristocats } from 'src/model/TheAristocats';
+import { TheGoodDinosaur } from 'src/model/TheGoodDinosaur';
+import { TheLionKing } from 'src/model/TheLionKing';
 import { TheNightmareBeforeChristmas } from 'src/model/TheNightmareBeforeChristmas';
 import { ToyStory } from 'src/model/ToyStory';
 import { Tsum } from 'src/model/Tsum';
@@ -55,6 +62,13 @@ const tsumList: Tsum[] = [
   ...Pinocchio,
   ...Zootopia,
   ...StarWars,
+  ...TheGoodDinosaur,
+  ...SnowWhite,
+  ...SleepingBeauty,
+  ...SteamboatWillie,
+  ...Cinderella,
+  ...TheLionKing,
+  ...JungleBook,
 ];
 
 export const getTsumsWithFilter = (filter: {

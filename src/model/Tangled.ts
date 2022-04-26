@@ -59,4 +59,10 @@ export const Tangled: Tsum[] = [
     skill: [S.CallSomeone, S.CallOthers],
     initial: [I.P],
   }),
+  new TangledTsum({
+    id: 108,
+    name: 'brideRapunzel',
+    url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/8/8b/BrideRapunzel.png',
+    gender: G.Female,
+  }),
 ];

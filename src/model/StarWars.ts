@@ -80,4 +80,46 @@ export const StarWars: Tsum[] = [
     url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/5/52/BB8.png',
     gender: G.Male,
   }),
+  new StarWarsTsum({
+    id: 128,
+    name: 'rey',
+    url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/c/c0/Rey.png',
+    gender: G.Female,
+  }),
+  new StarWarsTsum({
+    id: 129,
+    name: 'kyloRen',
+    url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/4/4b/KyloRen.png',
+    gender: G.Male,
+  }),
+  new StarWarsTsum({
+    id: 130,
+    name: 'jediLuke',
+    url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/d/d8/JediLuke.png',
+    gender: G.Male,
+  }),
+  new StarWarsTsum({
+    id: 131,
+    name: 'hanSolo',
+    url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/3/3e/HanSolo.png',
+    gender: G.Male,
+  }),
+  new StarWarsTsum({
+    id: 132,
+    name: 'chewbacca',
+    url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/f/f1/Chewbacca.png',
+    gender: G.Male,
+  }),
+  new StarWarsTsum({
+    id: 133,
+    name: 'k2so',
+    url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/7/74/K-2SO.png',
+    gender: G.Male,
+  }),
+  new StarWarsTsum({
+    id: 134,
+    name: 'deathTrooper',
+    url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/6/68/DeathTrooper.png',
+    gender: G.Male,
+  }),
 ];
