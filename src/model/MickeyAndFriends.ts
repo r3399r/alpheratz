@@ -30,7 +30,7 @@ class MickeyAndFriendsTsum extends BaseTsum implements Tsum {
     this.id = tsum.id;
     this.name = tsum.name;
     this.url = tsum.url;
-    this.box = tsum.box;
+    this.box = tsum.box ?? B.Premium;
     this.gender = tsum.gender;
     this.color = tsum.color;
     this.appearance = tsum.appearance;
@@ -126,5 +126,101 @@ export const MickeyAndFriends: Tsum[] = [
     other: [O.Dog],
     mickeyAndFriends: [M.MickeyAndFriends],
     initial: [I.P],
+  }),
+  new MickeyAndFriendsTsum({
+    id: 51,
+    name: 'pete',
+    url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/8/89/Pete.png',
+    gender: G.Male,
+  }),
+  new MickeyAndFriendsTsum({
+    id: 52,
+    name: 'pumpkinMickey',
+    url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/2/23/PumpkinMickey.png',
+    gender: G.Male,
+  }),
+  new MickeyAndFriendsTsum({
+    id: 53,
+    name: 'pumpkinMinnie',
+    url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/b/b4/PumpkinMinnie.png',
+    gender: G.Female,
+  }),
+  new MickeyAndFriendsTsum({
+    id: 54,
+    name: 'holidayMickey',
+    url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/3/35/HolidayMickey.png',
+    gender: G.Male,
+  }),
+  new MickeyAndFriendsTsum({
+    id: 55,
+    name: 'holidayMinnie',
+    url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/e/eb/HolidayMinnie.png',
+    gender: G.Female,
+  }),
+  new MickeyAndFriendsTsum({
+    id: 56,
+    name: 'holidayDonald',
+    url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/6/66/HolidayDonald.png',
+    gender: G.Male,
+  }),
+  new MickeyAndFriendsTsum({
+    id: 57,
+    name: 'holidayDaisy',
+    url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/c/c0/HolidayDaisy.png',
+    gender: G.Female,
+  }),
+  new MickeyAndFriendsTsum({
+    id: 58,
+    name: 'holidayGoofy',
+    url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/9/92/HolidayGoofy.png',
+    gender: G.Male,
+  }),
+  new MickeyAndFriendsTsum({
+    id: 59,
+    name: 'holidayPluto',
+    url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/1/12/HolidayPluto.png',
+    gender: G.Male,
+  }),
+  new MickeyAndFriendsTsum({
+    id: 60,
+    name: 'valentineMinnie',
+    url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/7/7c/ValentineMinnie.png',
+    gender: G.Female,
+  }),
+  new MickeyAndFriendsTsum({
+    id: 61,
+    name: 'valentineDaisy',
+    url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/9/97/ValentineDaisy.png',
+    gender: G.Female,
+  }),
+  new MickeyAndFriendsTsum({
+    id: 85,
+    name: 'hornHatMickey',
+    url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/f/f0/HornHatMickey.png',
+    gender: G.Male,
+  }),
+  new MickeyAndFriendsTsum({
+    id: 86,
+    name: 'catHatMinnie',
+    url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/a/a0/CatHatMinnie.png',
+    gender: G.Male,
+  }),
+  new MickeyAndFriendsTsum({
+    id: 89,
+    name: 'rattleBonesPluto',
+    url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/b/bf/RattleBonesPluto.png',
+    gender: G.Male,
+  }),
+  new MickeyAndFriendsTsum({
+    id: 90,
+    name: 'conductorMickey',
+    url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/0/0d/ConcertMickey.png',
+    gender: G.Male,
+  }),
+  new MickeyAndFriendsTsum({
+    id: 96,
+    name: 'max',
+    url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/3/32/Max.png',
+    gender: G.Male,
   }),
 ];

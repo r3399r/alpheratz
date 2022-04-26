@@ -62,6 +62,16 @@ export const TheNightmareBeforeChristmas: Tsum[] = [
   }),
   new TheNightmareBeforeChristmasTsum({
     id: 23,
+    name: 'zero',
+    url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/3/3c/Zero.png',
+    gender: G.Male,
+    color: [C.White],
+    appearance: [A.Eared, A.PointyEars],
+    skill: [S.MakeBatsAppear],
+    other: [O.Dog, O.Halloween],
+  }),
+  new TheNightmareBeforeChristmasTsum({
+    id: 213,
     name: 'sally',
     url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/2/2e/Sally.png',
     gender: G.Female,
@@ -70,15 +80,5 @@ export const TheNightmareBeforeChristmas: Tsum[] = [
     skill: [S.Burst, S.OtherBursts],
     other: [O.Halloween],
     initial: [I.S],
-  }),
-  new TheNightmareBeforeChristmasTsum({
-    id: 24,
-    name: 'zero',
-    url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/3/3c/Zero.png',
-    gender: G.Male,
-    color: [C.White],
-    appearance: [A.Eared, A.PointyEars],
-    skill: [S.MakeBatsAppear],
-    other: [O.Dog, O.Halloween],
   }),
 ];

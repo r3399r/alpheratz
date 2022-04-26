@@ -39,7 +39,7 @@ class BambiTsum extends BaseTsum implements Tsum {
 
 export const Bambi: Tsum[] = [
   new BambiTsum({
-    id: 38,
+    id: 37,
     name: 'bambi',
     url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/2/2d/Bambi.png',
     gender: G.Male,
@@ -49,7 +49,7 @@ export const Bambi: Tsum[] = [
     initial: [I.B],
   }),
   new BambiTsum({
-    id: 39,
+    id: 38,
     name: 'thumper',
     url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/8/81/Thumper.png',
     gender: G.Male,
@@ -59,7 +59,7 @@ export const Bambi: Tsum[] = [
     initial: [I.T],
   }),
   new BambiTsum({
-    id: 40,
+    id: 39,
     name: 'missBunny',
     url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/e/e0/MissBunny.png',
     gender: G.Female,

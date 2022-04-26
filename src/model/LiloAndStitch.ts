@@ -66,4 +66,22 @@ export const LiloAndStitch: Tsum[] = [
     ],
     initial: [I.S],
   }),
+  new LiloAndStitchTsum({
+    id: 71,
+    name: 'angel',
+    url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/8/83/Angel.png',
+    gender: G.Female,
+  }),
+  new LiloAndStitchTsum({
+    id: 72,
+    name: 'hawaiianStitch',
+    url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/4/4d/HawaiianStitch.png',
+    gender: G.Male,
+  }),
+  new LiloAndStitchTsum({
+    id: 73,
+    name: 'lilo',
+    url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/f/f4/Lilo.png',
+    gender: G.Female,
+  }),
 ];

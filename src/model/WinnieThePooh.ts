@@ -30,7 +30,7 @@ class WinnieThePoohTsum extends BaseTsum implements Tsum {
     this.id = tsum.id;
     this.name = tsum.name;
     this.url = tsum.url;
-    this.box = tsum.box;
+    this.box = tsum.box ?? B.Premium;
     this.gender = tsum.gender;
     this.color = tsum.color;
     this.appearance = tsum.appearance;
@@ -112,5 +112,30 @@ export const WinnieThePooh: Tsum[] = [
     color: [C.Brown],
     appearance: [A.PointyHair, A.Eared, A.PointyEars, A.PinkEars, A.Eyebrows, A.TriangleNose],
     skill: [S.Burst, S.BurstVertical],
+  }),
+  new WinnieThePoohTsum({
+    id: 50,
+    name: 'bumblebeePooh',
+    url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/4/43/BeePooh.png',
+    gender: G.Male,
+  }),
+  new WinnieThePoohTsum({
+    id: 66,
+    name: 'bunnyPooh',
+    url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/6/66/BunnyPooh.png',
+    gender: G.Male,
+  }),
+  new WinnieThePoohTsum({
+    id: 67,
+    name: 'bunnyTiger',
+    url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/9/92/BunnyTigger.png',
+    gender: G.Male,
+  }),
+  new WinnieThePoohTsum({
+    id: 68,
+    name: 'rabbit',
+    url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/f/fd/Rabbit.png',
+    box: B.Happiness,
+    gender: G.Male,
   }),
 ];

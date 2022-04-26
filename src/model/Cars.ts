@@ -10,7 +10,7 @@ import {
 } from 'src/constant/Category';
 import { BaseTsum, Tsum } from './Tsum';
 
-class PeterPanTsum extends BaseTsum implements Tsum {
+class CarsTsum extends BaseTsum implements Tsum {
   id: number;
   name: string;
   url: string;
@@ -23,7 +23,7 @@ class PeterPanTsum extends BaseTsum implements Tsum {
   initial?: I[];
 
   constructor(tsum: Omit<Tsum, 'series'>) {
-    super(Series.PeterPan);
+    super(Series.Cars);
     this.id = tsum.id;
     this.name = tsum.name;
     this.url = tsum.url;
@@ -37,15 +37,17 @@ class PeterPanTsum extends BaseTsum implements Tsum {
   }
 }
 
-export const PeterPan: Tsum[] = [
-  new PeterPanTsum({
-    id: 36,
-    name: 'tinkerBell',
-    url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/7/7c/Tinkerbell.png',
-    gender: G.Female,
-    color: [C.Yellow],
-    appearance: [A.TiedHair, A.Eared, A.RoundEars, A.Eyebrows, A.Eyeslashes],
-    skill: [S.Burst, S.BurstHorizontal],
-    initial: [I.B, I.T],
+export const Cars: Tsum[] = [
+  new CarsTsum({
+    id: 74,
+    name: 'lightningMcQueen',
+    url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/8/81/McQueen.png',
+    gender: G.Male,
+  }),
+  new CarsTsum({
+    id: 75,
+    name: 'mater',
+    url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/e/ee/Mater.png',
+    gender: G.Male,
   }),
 ];

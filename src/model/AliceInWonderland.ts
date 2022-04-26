@@ -39,7 +39,7 @@ class AliceInWonderlandTsum extends BaseTsum implements Tsum {
 
 export const AliceInWonderland: Tsum[] = [
   new AliceInWonderlandTsum({
-    id: 33,
+    id: 32,
     name: 'alice',
     url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/8/82/Alice.png',
     gender: G.Female,
@@ -49,7 +49,7 @@ export const AliceInWonderland: Tsum[] = [
     skill: [S.MakeBigTsum],
   }),
   new AliceInWonderlandTsum({
-    id: 34,
+    id: 33,
     name: 'whiteRabbit',
     url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/1/1c/WhiteRabbit.png',
     gender: G.Male,
@@ -68,7 +68,7 @@ export const AliceInWonderland: Tsum[] = [
     initial: [I.S],
   }),
   new AliceInWonderlandTsum({
-    id: 35,
+    id: 34,
     name: 'cheshireCat',
     url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/2/28/Cheshire.png',
     gender: G.Male,
@@ -86,7 +86,7 @@ export const AliceInWonderland: Tsum[] = [
     other: [O.Cat],
   }),
   new AliceInWonderlandTsum({
-    id: 36,
+    id: 35,
     name: 'littleOyster',
     url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/8/82/LittleOyster.png',
     gender: G.Unknown,

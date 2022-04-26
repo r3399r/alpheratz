@@ -39,7 +39,7 @@ class ToyStoryTsum extends BaseTsum implements Tsum {
 
 export const ToyStory: Tsum[] = [
   new ToyStoryTsum({
-    id: 25,
+    id: 24,
     name: 'woody',
     url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/2/25/Woody.png',
     gender: G.Male,
@@ -51,7 +51,7 @@ export const ToyStory: Tsum[] = [
     initial: [I.P],
   }),
   new ToyStoryTsum({
-    id: 26,
+    id: 25,
     name: 'buzzLightyear',
     url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/4/4e/Buzz.png',
     gender: G.Male,
@@ -62,7 +62,7 @@ export const ToyStory: Tsum[] = [
     initial: [I.B],
   }),
   new ToyStoryTsum({
-    id: 27,
+    id: 26,
     name: 'jessie',
     url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/7/7a/Jessie.png',
     gender: G.Female,
@@ -74,7 +74,7 @@ export const ToyStory: Tsum[] = [
     initial: [I.J],
   }),
   new ToyStoryTsum({
-    id: 28,
+    id: 27,
     name: 'alien',
     url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/1/12/Alien.png',
     gender: G.Unknown,
@@ -84,7 +84,7 @@ export const ToyStory: Tsum[] = [
     initial: [I.A],
   }),
   new ToyStoryTsum({
-    id: 29,
+    id: 28,
     name: 'lotso',
     url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/6/6d/Lotso.png',
     gender: G.Male,
@@ -92,5 +92,11 @@ export const ToyStory: Tsum[] = [
     appearance: [A.Eared, A.RoundEars, A.PinkEars, A.Eyebrows, A.TriangleNose, A.RosyCheeks],
     skill: [S.Burst, S.BurstBottom],
     other: [O.Pixar, O.Villain],
+  }),
+  new ToyStoryTsum({
+    id: 76,
+    name: 'rex',
+    url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/5/5f/Rex.png',
+    gender: G.Male,
   }),
 ];

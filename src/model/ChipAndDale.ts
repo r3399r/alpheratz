@@ -30,7 +30,7 @@ class ChipAndDaleTsum extends BaseTsum implements Tsum {
     this.id = tsum.id;
     this.name = tsum.name;
     this.url = tsum.url;
-    this.box = tsum.box;
+    this.box = tsum.box ?? B.Premium;
     this.gender = tsum.gender;
     this.color = tsum.color;
     this.appearance = tsum.appearance;
@@ -65,5 +65,23 @@ export const ChipAndDale: Tsum[] = [
     gender: G.Male,
     mickeyAndFriends: [M.MickeyAndFriends],
     initial: [I.D],
+  }),
+  new ChipAndDaleTsum({
+    id: 87,
+    name: 'pumkinChip',
+    url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/1/15/PumpkinChip.png',
+    gender: G.Male,
+  }),
+  new ChipAndDaleTsum({
+    id: 88,
+    name: 'ghostDale',
+    url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/3/3f/GhostDale.png',
+    gender: G.Male,
+  }),
+  new ChipAndDaleTsum({
+    id: 97,
+    name: 'clarice',
+    url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/0/09/Clarice.png',
+    gender: G.Female,
   }),
 ];

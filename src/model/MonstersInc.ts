@@ -39,7 +39,7 @@ class MonstersIncTsum extends BaseTsum implements Tsum {
 
 export const MonstersInc: Tsum[] = [
   new MonstersIncTsum({
-    id: 30,
+    id: 29,
     name: 'mike',
     url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/0/03/Mike.png',
     gender: G.Male,
@@ -50,7 +50,7 @@ export const MonstersInc: Tsum[] = [
     other: [O.Pixar],
   }),
   new MonstersIncTsum({
-    id: 31,
+    id: 30,
     name: 'sulley',
     url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/e/ef/Sulley.png',
     gender: G.Male,
@@ -59,5 +59,11 @@ export const MonstersInc: Tsum[] = [
     skill: [S.CallSomeone, S.CallMyTsum, S.MakeBigTsum],
     other: [O.Pixar],
     initial: [I.S],
+  }),
+  new MonstersIncTsum({
+    id: 77,
+    name: 'randall',
+    url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/8/86/Randall.png',
+    gender: G.Male,
   }),
 ];

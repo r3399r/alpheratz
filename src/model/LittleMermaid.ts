@@ -39,7 +39,7 @@ class LittleMermaidTsum extends BaseTsum implements Tsum {
 
 export const LittleMermaid: Tsum[] = [
   new LittleMermaidTsum({
-    id: 46,
+    id: 45,
     name: 'ariel',
     url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/0/0a/Ariel.png',
     gender: G.Female,
@@ -50,7 +50,7 @@ export const LittleMermaid: Tsum[] = [
     initial: [I.A],
   }),
   new LittleMermaidTsum({
-    id: 47,
+    id: 46,
     name: 'flounder',
     url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/8/85/Flounder.png',
     gender: G.Male,
@@ -60,7 +60,7 @@ export const LittleMermaid: Tsum[] = [
     other: [O.Marine],
   }),
   new LittleMermaidTsum({
-    id: 48,
+    id: 47,
     name: 'sebastian',
     url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/a/a8/Sebastian.png',
     gender: G.Male,
@@ -69,5 +69,23 @@ export const LittleMermaid: Tsum[] = [
     skill: [S.Burst, S.BurstRandom],
     other: [O.Marine],
     initial: [I.S],
+  }),
+  new LittleMermaidTsum({
+    id: 78,
+    name: 'romanceAriel',
+    url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/b/b4/RomanceAriel.png',
+    gender: G.Female,
+  }),
+  new LittleMermaidTsum({
+    id: 79,
+    name: 'kingTriton',
+    url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/5/52/KingTriton.png',
+    gender: G.Male,
+  }),
+  new LittleMermaidTsum({
+    id: 80,
+    name: 'scuttle',
+    url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/8/89/Scuttle.png',
+    gender: G.Male,
   }),
 ];

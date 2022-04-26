@@ -10,7 +10,7 @@ import {
 } from 'src/constant/Category';
 import { BaseTsum, Tsum } from './Tsum';
 
-class TangledTsum extends BaseTsum implements Tsum {
+class ZootopiaTsum extends BaseTsum implements Tsum {
   id: number;
   name: string;
   url: string;
@@ -23,7 +23,7 @@ class TangledTsum extends BaseTsum implements Tsum {
   initial?: I[];
 
   constructor(tsum: Omit<Tsum, 'series'>) {
-    super(Series.Tangled);
+    super(Series.Zootopia);
     this.id = tsum.id;
     this.name = tsum.name;
     this.url = tsum.url;
@@ -37,26 +37,23 @@ class TangledTsum extends BaseTsum implements Tsum {
   }
 }
 
-export const Tangled: Tsum[] = [
-  new TangledTsum({
-    id: 48,
-    name: 'rapunzel',
-    url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/f/fd/Rapunzel.png',
-    gender: G.Female,
-    color: [C.Yellow],
-    appearance: [A.TiedHair, A.Eared, A.RoundEars, A.Eyebrows, A.Eyeslashes],
-    wear: [W.WithFollowers],
-    skill: [S.CallSomeone, S.CallLover],
-    other: [O.Princess],
-  }),
-  new TangledTsum({
-    id: 49,
-    name: 'pascal',
-    url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/0/0b/Pascal.png',
+export const Zootopia: Tsum[] = [
+  new ZootopiaTsum({
+    id: 93,
+    name: 'nickWilde',
+    url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/0/04/NickWilde.png',
     gender: G.Male,
-    color: [C.Green],
-    appearance: [A.VisibleEyeWhites, A.Mouthed],
-    skill: [S.CallSomeone, S.CallOthers],
-    initial: [I.P],
+  }),
+  new ZootopiaTsum({
+    id: 94,
+    name: 'judyHopps',
+    url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/d/d1/JudyHopps.png',
+    gender: G.Female,
+  }),
+  new ZootopiaTsum({
+    id: 95,
+    name: 'finnick',
+    url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/f/ff/Finnick.png',
+    gender: G.Male,
   }),
 ];

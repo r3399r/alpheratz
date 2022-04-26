@@ -10,7 +10,7 @@ import {
 } from 'src/constant/Category';
 import { BaseTsum, Tsum } from './Tsum';
 
-class PeterPanTsum extends BaseTsum implements Tsum {
+class BigHero6Tsum extends BaseTsum implements Tsum {
   id: number;
   name: string;
   url: string;
@@ -23,7 +23,7 @@ class PeterPanTsum extends BaseTsum implements Tsum {
   initial?: I[];
 
   constructor(tsum: Omit<Tsum, 'series'>) {
-    super(Series.PeterPan);
+    super(Series.BigHero6);
     this.id = tsum.id;
     this.name = tsum.name;
     this.url = tsum.url;
@@ -37,15 +37,11 @@ class PeterPanTsum extends BaseTsum implements Tsum {
   }
 }
 
-export const PeterPan: Tsum[] = [
-  new PeterPanTsum({
-    id: 36,
-    name: 'tinkerBell',
-    url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/7/7c/Tinkerbell.png',
-    gender: G.Female,
-    color: [C.Yellow],
-    appearance: [A.TiedHair, A.Eared, A.RoundEars, A.Eyebrows, A.Eyeslashes],
-    skill: [S.Burst, S.BurstHorizontal],
-    initial: [I.B, I.T],
+export const BigHero6: Tsum[] = [
+  new BigHero6Tsum({
+    id: 62,
+    name: 'baymax',
+    url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/f/f8/Baymax.png',
+    gender: G.Male,
   }),
 ];

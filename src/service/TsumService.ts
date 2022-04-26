@@ -1,7 +1,12 @@
+import { Aladdin } from 'src/model/Aladdin';
 import { AliceInWonderland } from 'src/model/AliceInWonderland';
 import { Bambi } from 'src/model/Bambi';
+import { BeautyAndTheBeast } from 'src/model/BeautyAndTheBeast';
+import { BigHero6 } from 'src/model/BigHero6';
+import { Cars } from 'src/model/Cars';
 import { ChipAndDale } from 'src/model/ChipAndDale';
 import { Dumbo } from 'src/model/Dumbo';
+import { Fantasia } from 'src/model/Fantasia';
 import { Frozen } from 'src/model/Frozen';
 import { LadyAndTheTramp } from 'src/model/LadyAndTheTramp';
 import { LiloAndStitch } from 'src/model/LiloAndStitch';
@@ -12,12 +17,15 @@ import { MonstersInc } from 'src/model/MonstersInc';
 import { OswaldTheLuckyRabbit } from 'src/model/OswaldTheLuckyRabbit';
 import { PeterPan } from 'src/model/PeterPan';
 import { PhineasAndFerb } from 'src/model/PhineasAndFerb';
+import { Pinocchio } from 'src/model/Pinocchio';
+import { StarWars } from 'src/model/StarWars';
 import { Tangled } from 'src/model/Tangled';
 import { TheAristocats } from 'src/model/TheAristocats';
 import { TheNightmareBeforeChristmas } from 'src/model/TheNightmareBeforeChristmas';
 import { ToyStory } from 'src/model/ToyStory';
 import { Tsum } from 'src/model/Tsum';
 import { WinnieThePooh } from 'src/model/WinnieThePooh';
+import { Zootopia } from 'src/model/Zootopia';
 
 const tsumList: Tsum[] = [
   ...MickeyAndFriends,
@@ -39,6 +47,14 @@ const tsumList: Tsum[] = [
   ...Maleficent,
   ...LittleMermaid,
   ...Tangled,
+  ...BigHero6,
+  ...Fantasia,
+  ...BeautyAndTheBeast,
+  ...Cars,
+  ...Aladdin,
+  ...Pinocchio,
+  ...Zootopia,
+  ...StarWars,
 ];
 
 export const getTsumsWithFilter = (filter: {
@@ -54,6 +70,7 @@ export const getTsumsWithFilter = (filter: {
   series: string[];
 }) =>
   tsumList
+    .sort((a, b) => (a.id > b.id ? 1 : -1))
     .filter((v) => filter.color.length === 0 || checker(filter.color, v.color))
     .filter((v) => filter.appearance.length === 0 || checker(filter.appearance, v.appearance))
     .filter((v) => filter.wear.length === 0 || checker(filter.wear, v.wear))

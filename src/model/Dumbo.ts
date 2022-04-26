@@ -39,7 +39,7 @@ class DumboTsum extends BaseTsum implements Tsum {
 
 export const Dumbo: Tsum[] = [
   new DumboTsum({
-    id: 32,
+    id: 31,
     name: 'dumbo',
     url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/b/b8/Dumbo.png',
     gender: G.Male,

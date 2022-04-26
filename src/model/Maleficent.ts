@@ -39,7 +39,7 @@ class MaleficentTsum extends BaseTsum implements Tsum {
 
 export const Maleficent: Tsum[] = [
   new MaleficentTsum({
-    id: 45,
+    id: 44,
     name: 'maleficent',
     url: 'https://static.wikia.nocookie.net/disneytsumtsum/images/e/e8/Maleficent.png',
     gender: G.Female,
