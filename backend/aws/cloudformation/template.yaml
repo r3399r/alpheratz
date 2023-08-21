@@ -90,8 +90,9 @@ Resources:
       Runtime: nodejs18.x
       FunctionName: !Sub ${Project}-${TargetEnvr}-lambda
       Role: !GetAtt ExecutionRole.Arn
-      CodeUri: ../../dist/webpack/lambda
+      CodeUri: ../../lib/src
       MemorySize: 128
+      Layers: [!Ref LambdaLayer]
       Environment:
         Variables:
           PROJECT: !Sub ${Project}
@@ -111,6 +112,14 @@ Resources:
       Action: 'lambda:InvokeFunction'
       Principal: apigateway.amazonaws.com
       SourceArn: !Sub arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${ServerlessApi}/*
+  LambdaLayer:
+    Type: AWS::Serverless::LayerVersion
+    Properties:
+      LayerName: !Sub ${Project}-${TargetEnvr}-layer
+      CompatibleArchitectures: [arm64]
+      CompatibleRuntimes: [nodejs18.x]
+      ContentUri: ../../dist
+      RetentionPolicy: Delete
   #########################################
   ##### Cloudfront and Route53 config #####
   #########################################

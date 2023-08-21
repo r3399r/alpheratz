@@ -5,5 +5,5 @@ export const handler = async (
   event: WebhookRequestBody,
   _context?: LambdaContext
 ) => {
-  console.log(JSON.stringify(event));
+  console.log(event)
 };
