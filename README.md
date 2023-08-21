@@ -1,2 +1,2 @@
 # alpheratz
-hgsh treasure line bot
+HGSH treasure line bot
