@@ -70,7 +70,7 @@ Resources:
                   "passthroughBehavior": "when_no_match",
                   "httpMethod": "POST",
                   "contentHandling": "CONVERT_TO_TEXT",
-                  "type": "aws"
+                  "type": "aws_proxy"
                 }
               }
             },
@@ -97,13 +97,11 @@ Resources:
         Variables:
           PROJECT: !Sub ${Project}
           ENVR: !Sub ${TargetEnvr}
-          # DB_ENDPOINT:
-          #   Fn::ImportValue: !Sub ${Project}-${TargetEnvr}-db-endpoint
-          # DB_PORT:
-          #   Fn::ImportValue: !Sub ${Project}-${TargetEnvr}-db-port
-          # DB_USERNAME:
-          #   Fn::ImportValue: !Sub ${Project}-${TargetEnvr}-db-username
-          # DB_PASSWORD: !Sub '{{resolve:ssm:${Project}-${TargetEnvr}-db-pwd}}'
+          DB_CLUSTER: !Sub '{{resolve:ssm:${TargetEnvr}-db-cluster:1}}'
+          DB_HOST: !Sub '{{resolve:ssm:${TargetEnvr}-db-host:1}}'
+          DB_PWD: !Sub '{{resolve:ssm:${TargetEnvr}-db-pwd:1}}'
+          DB_USER: !Sub '{{resolve:ssm:${TargetEnvr}-db-user:1}}'
+          CHANNEL_TOKEN: !Sub '{{resolve:ssm:${Project}-${TargetEnvr}-token:1}}'
   InvokePermissionLambda:
     Type: AWS::Lambda::Permission
     DependsOn: [ServerlessApi, LambdaFunction]

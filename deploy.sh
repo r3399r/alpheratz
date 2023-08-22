@@ -1,13 +1,13 @@
 #!/bin/bash
 set -e
 
-env=dev
+env=test
 project=alpheratz
 # subDomain=wedding
 # domain=celestialstudio.net
 
 echo ====================================================================================
-echo env: dev
+echo env: $env
 echo project: $project
 # echo domain: $subDomain.$domain
 echo ====================================================================================
