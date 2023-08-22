@@ -44,12 +44,12 @@ export const config: Config = {
         },
         {
           type: 'image',
-          content: '/sss.json',
+          content: 'main-0-welcome.jpg',
         },
         {
           type: 'text',
           content:
-            '隨著時間的流逝，元素的光芒漸顯黯淡。來自遠方的旅人阿，可否借助你力，讓這失落的元素再顯從前的光芒？',
+            '隨著時間的流逝，元素的光芒漸顯黯淡。來自遠方的旅人阿，可否借助你力，讓這失落的元素再顯從前的光芒？請輸入「可以」、或是「不可以」',
         },
       ],
       quickReply: ['可以', '不可以'],
@@ -64,7 +64,7 @@ export const config: Config = {
           message: [
             {
               type: 'text',
-              content: '寶藏與秘密，只顯與那些願意追尋、勇敢承擔的勇士。...',
+              content: '寶藏與秘密，只顯與那些願意追尋、勇敢承擔的勇士。\n你可以無視，但埋藏的秘密你將無法知曉。\n（輸入「可以」，你還是可以反悔）',
             },
           ],
           quickReply: ['可以'],

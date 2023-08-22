@@ -1,10 +1,11 @@
-import { Message } from '@line/bot-sdk';
+import { ImageMessage, Message, TextMessage } from '@line/bot-sdk';
 import { Message as ConfigMessage } from 'src/constant/config';
 
 export const ConfigMessage2LineMessage = (
-  messages: ConfigMessage[]
-): Message[] =>
-  messages.map((v) => {
+  messages: ConfigMessage[],
+  quickReply?: string[]
+): Message[] => {
+  const res = messages.map((v): TextMessage | ImageMessage => {
     if (v.type === 'text')
       return {
         type: 'text',
@@ -13,9 +14,18 @@ export const ConfigMessage2LineMessage = (
     else
       return {
         type: 'image',
-        originalContentUrl:
-          'https://venus-prod-y.s3.ap-southeast-1.amazonaws.com/img08150958/invitation.jpg',
-        previewImageUrl:
-          'https://venus-prod-y.s3.ap-southeast-1.amazonaws.com/img08150958/invitation.jpg',
+        originalContentUrl: `https://${process.env.PROJECT}-${process.env.ENVR}.s3.ap-southeast-1.amazonaws.com/image/${v.content}`,
+        previewImageUrl: `https://${process.env.PROJECT}-${process.env.ENVR}.s3.ap-southeast-1.amazonaws.com/image/${v.content}`,
       };
   });
+
+  if (quickReply)
+    res[res.length - 1].quickReply = {
+      items: quickReply.map((v) => ({
+        type: 'action',
+        action: { type: 'message', label: v, text: v },
+      })),
+    };
+
+  return res;
+};

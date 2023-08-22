@@ -23,7 +23,11 @@ const chat = async (body: WebhookRequestBody) => {
           await service.unfollow(event.source.userId);
           break;
         case 'message':
-          await service.message();
+          await service.message(
+            event.message,
+            event.source.userId,
+            event.replyToken
+          );
           break;
       }
     }
