@@ -1,20 +1,38 @@
 export type Message = {
   type: 'text' | 'image';
   content: string;
-};
-
-type Reply = {
-  type: 'pass' | 'fail' | 'hint';
-  keyword: string | null;
-  message?: Message[];
   quickReply?: string[];
 };
 
-type Stage = {
+export type Reply = PassReply | HintReply | FailReply | DefaultFailReply;
+
+type PassReply = {
+  type: 'pass';
+  keyword: string;
+};
+
+type HintReply = {
+  type: 'hint';
+  keyword: string;
+  message: Message[];
+};
+
+type FailReply = {
+  type: 'fail';
+  keyword: string;
+  message: Message[];
+};
+
+type DefaultFailReply = {
+  type: 'fail';
+  keyword: null;
+  message: Message[];
+};
+
+export type Stage = {
   prevStage: string | null;
   stage: string;
   message: Message[];
-  quickReply?: string[];
   reply?: Reply[];
 };
 
@@ -50,9 +68,9 @@ export const config: Config = {
           type: 'text',
           content:
             '隨著時間的流逝，元素的光芒漸顯黯淡。來自遠方的旅人阿，可否借助你力，讓這失落的元素再顯從前的光芒？請輸入「可以」、或是「不可以」',
+          quickReply: ['可以', '不可以'],
         },
       ],
-      quickReply: ['可以', '不可以'],
       reply: [
         {
           type: 'pass',
@@ -64,10 +82,11 @@ export const config: Config = {
           message: [
             {
               type: 'text',
-              content: '寶藏與秘密，只顯與那些願意追尋、勇敢承擔的勇士。\n你可以無視，但埋藏的秘密你將無法知曉。\n（輸入「可以」，你還是可以反悔）',
+              content:
+                '寶藏與秘密，只顯與那些願意追尋、勇敢承擔的勇士。\n你可以無視，但埋藏的秘密你將無法知曉。\n（輸入「可以」，你還是可以反悔）',
+              quickReply: ['可以'],
             },
           ],
-          quickReply: ['可以'],
         },
       ],
     },
@@ -123,9 +142,9 @@ export const config: Config = {
           type: 'text',
           content:
             '（請分別輸入「風」、「火」、「土」、「水」、「以太」來蒐集這五種元素，順序不拘）',
+          quickReply: ['風', '火', '土', '水', '以太'],
         },
       ],
-      quickReply: ['風', '火', '土', '水', '以太'],
       reply: [
         {
           type: 'pass',

@@ -17,13 +17,13 @@ const chat = async (body: WebhookRequestBody) => {
         throw new Error('unexpected source type');
       switch (event.type) {
         case 'follow':
-          await service.follow(event.source.userId, event.replyToken);
+          await service.receiveFollow(event.source.userId, event.replyToken);
           break;
         case 'unfollow':
-          await service.unfollow(event.source.userId);
+          await service.receiveUnfollow(event.source.userId);
           break;
         case 'message':
-          await service.message(
+          await service.receiveMessage(
             event.message,
             event.source.userId,
             event.replyToken

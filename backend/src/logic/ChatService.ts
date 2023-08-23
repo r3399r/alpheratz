@@ -3,10 +3,10 @@ import { inject, injectable } from 'inversify';
 import { DbAccess } from 'src/access/DbAccess';
 import { LogAccess } from 'src/access/LogAccess';
 import { UserAccess } from 'src/access/UserAccess';
-import { config } from 'src/constant/config';
+import { config, Reply, Stage } from 'src/constant/config';
 import { LogEntity } from 'src/model/entity/logEntity';
-import { UserEntity } from 'src/model/entity/userEntity';
-import { ConfigMessage2LineMessage } from 'src/util/ConfigHelper';
+import { User, UserEntity } from 'src/model/entity/userEntity';
+import { toLineMessage } from 'src/util/ConfigHelper';
 
 /**
  * Service class for Chat
@@ -25,11 +25,14 @@ export class ChatService {
   @inject(Client)
   private readonly client!: Client;
 
+  private user!: User;
+  private message!: string;
+
   public async cleanup() {
     await this.dbAccess.cleanup();
   }
 
-  public async follow(userId: string, replyToken: string) {
+  public async receiveFollow(userId: string, replyToken: string) {
     try {
       await this.dbAccess.startTransaction();
 
@@ -49,7 +52,7 @@ export class ChatService {
 
       await this.client.replyMessage(
         replyToken,
-        ConfigMessage2LineMessage(firstStage.message, firstStage.quickReply)
+        toLineMessage(firstStage.message)
       );
 
       await this.dbAccess.commitTransaction();
@@ -59,7 +62,7 @@ export class ChatService {
     }
   }
 
-  public async unfollow(userId: string) {
+  public async receiveUnfollow(userId: string) {
     try {
       await this.dbAccess.startTransaction();
 
@@ -79,7 +82,67 @@ export class ChatService {
     }
   }
 
-  public async message(
+  private async saveNotPassMessageLog(type: 'hint' | 'fail') {
+    const log = new LogEntity();
+    log.user = this.user;
+    log.action = 'message';
+    log.message = this.message;
+    log.type = type;
+    await this.logAccess.save(log);
+  }
+
+  private async handleNotPassMessage(
+    reply: Reply | undefined,
+    replyToken: string
+  ) {
+    if (reply?.type === 'pass') return;
+    if (reply === undefined) {
+      await this.saveNotPassMessageLog('fail');
+      await this.client.replyMessage(replyToken, {
+        type: 'text',
+        text: '不對唷！再想想',
+      });
+    } else if (reply.type === 'hint') {
+      await this.saveNotPassMessageLog('hint');
+      await this.client.replyMessage(replyToken, toLineMessage(reply.message));
+    } else {
+      await this.saveNotPassMessageLog('fail');
+      await this.client.replyMessage(replyToken, toLineMessage(reply.message));
+    }
+  }
+
+  private async handleMainStages(
+    currentStage: Stage,
+    nextStage: Stage,
+    replyToken: string
+  ) {
+    const reply =
+      currentStage.reply?.find((v) => v.keyword === this.message) ??
+      currentStage.reply?.find((v) => v.keyword === null);
+    if (reply?.type !== 'pass')
+      await this.handleNotPassMessage(reply, replyToken);
+    else {
+      this.user.mainStage = nextStage.stage;
+      await this.userAccess.save(this.user);
+
+      const log = new LogEntity();
+      log.user = this.user;
+      log.action = 'message';
+      log.message = this.message;
+      log.type = 'pass';
+      log.attribute = 'main_stage';
+      log.oldValue = currentStage.stage;
+      log.newValue = nextStage.stage;
+      await this.logAccess.save(log);
+
+      await this.client.replyMessage(
+        replyToken,
+        toLineMessage(nextStage.message)
+      );
+    }
+  }
+
+  public async receiveMessage(
     eventMessage: EventMessage,
     userId: string,
     replyToken: string
@@ -87,105 +150,25 @@ export class ChatService {
     try {
       await this.dbAccess.startTransaction();
       if (eventMessage.type !== 'text') return;
-      const message = eventMessage.text;
-      const user = await this.userAccess.findOneById(userId);
+      this.message = eventMessage.text;
+      this.user = await this.userAccess.findOneById(userId);
 
       // check status: before-game or in-game
       const currentMainStage = config.main.find(
-        (v) => v.stage === user.mainStage
+        (v) => v.stage === this.user.mainStage
       );
       const nextMainStage = config.main.find(
-        (v) => v.prevStage === user.mainStage
+        (v) => v.prevStage === this.user.mainStage
       );
       if (currentMainStage === undefined || nextMainStage === undefined)
         throw new Error('unexpected main stage result');
 
-      const passKeywords: string[] = [];
-      const failKeywords: string[] = [];
-      const hintKeywords: string[] = [];
-      currentMainStage.reply?.forEach((v) => {
-        if (v.type === 'pass' && v.keyword) passKeywords.push(v.keyword);
-        if (v.type === 'fail' && v.keyword) failKeywords.push(v.keyword);
-        if (v.type === 'hint' && v.keyword) hintKeywords.push(v.keyword);
-      });
       if (currentMainStage.stage !== 'in-game')
-        if (passKeywords.includes(message)) {
-          user.mainStage = nextMainStage.stage;
-          await this.userAccess.save(user);
-
-          const log = new LogEntity();
-          log.user = user;
-          log.action = 'message';
-          log.message = message;
-          log.type = 'pass';
-          log.attribute = 'main_stage';
-          log.oldValue = currentMainStage.stage;
-          log.newValue = nextMainStage.stage;
-          await this.logAccess.save(log);
-
-          await this.client.replyMessage(
-            replyToken,
-            ConfigMessage2LineMessage(
-              nextMainStage.message,
-              nextMainStage.quickReply
-            )
-          );
-        } else if (hintKeywords.includes(message)) {
-          const log = new LogEntity();
-          log.user = user;
-          log.action = 'message';
-          log.message = message;
-          log.type = 'hint';
-          await this.logAccess.save(log);
-
-          const hint = currentMainStage.reply?.find(
-            (v) => v.keyword === message
-          );
-          if (hint?.message)
-            await this.client.replyMessage(
-              replyToken,
-              ConfigMessage2LineMessage(hint.message, hint.quickReply)
-            );
-        } else if (failKeywords.includes(message)) {
-          const log = new LogEntity();
-          log.user = user;
-          log.action = 'message';
-          log.message = message;
-          log.type = 'fail';
-          await this.logAccess.save(log);
-
-          const fail = currentMainStage.reply?.find(
-            (v) => v.keyword === message
-          );
-          if (fail?.message)
-            await this.client.replyMessage(
-              replyToken,
-              ConfigMessage2LineMessage(fail.message, fail.quickReply)
-            );
-        } else {
-          // const log = new LogEntity();
-          // log.user = user;
-          // log.action = 'message';
-          // log.message = message;
-          // log.type = 'fail';
-          // await this.logAccess.save(log);
-          const defaultFail = currentMainStage.reply?.find(
-            (v) => v.keyword === null
-          );
-          if (defaultFail && defaultFail.message)
-            await this.client.replyMessage(
-              replyToken,
-              ConfigMessage2LineMessage(
-                defaultFail.message,
-                defaultFail.quickReply
-              )
-            );
-          else
-            await this.client.replyMessage(replyToken, {
-              type: 'text',
-              text: '不對唷！再想想',
-            });
-        }
+        await this.handleMainStages(
+          currentMainStage,
+          nextMainStage,
+          replyToken
+        );
 
       await this.dbAccess.commitTransaction();
     } catch (e) {
