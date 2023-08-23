@@ -35,9 +35,9 @@ type Config = {
   main: Stage[];
   fire: Stage[];
   water: Stage[];
-  // earth:Stage[];
-  // air:Stage[];
-  // aether:Stage[];
+  earth: Stage[];
+  air: Stage[];
+  aether: Stage[];
 };
 
 export const config: Config = {
@@ -57,7 +57,8 @@ export const config: Config = {
         },
         {
           type: 'image',
-          content: 'main-0-welcome.jpg',
+          content:
+            'https://alpheratz-test.s3.ap-southeast-1.amazonaws.com/image/main-0-welcome.jpg',
         },
         {
           type: 'text',
@@ -116,6 +117,11 @@ export const config: Config = {
       stage: 'in-game',
       message: [
         {
+          type: 'image',
+          content:
+            'https://alpheratz-test.s3.ap-southeast-1.amazonaws.com/image/main-1-elements.jpg',
+        },
+        {
           type: 'text',
           content:
             '天光乍現，複雜的形體瞬間崩裂，每一個元素碎片在它所在的多面體中低喚。請前去蒐集所有的元素吧！一旦你得到所有的元素，它們將告訴你如何使它們重回光芒。',
@@ -127,7 +133,8 @@ export const config: Config = {
         },
         {
           type: 'image',
-          content: 'main-1-map.jpg',
+          content:
+            'https://alpheratz-test.s3.ap-southeast-1.amazonaws.com/image/main-2-map.jpg',
           quickReply: ['風', '火', '土', '水', '以太'],
         },
       ],
@@ -177,11 +184,22 @@ export const config: Config = {
       message: [
         {
           type: 'image',
-          content: '/xxxx',
+          content:
+            'https://alpheratz-test.s3.ap-southeast-1.amazonaws.com/image/fire-1-map.jpg',
         },
         {
           type: 'text',
-          content: '「火，走出洞穴與原始，啟動知識與文明。」',
+          content:
+            '「火，走出洞穴與原始，啟動知識與文明。」\n小禮堂，這是現今它的名字。\n斑駁水泥牆面遺留各式圖騰，\n細數先人智慧之結晶，\n解給其中秘密。',
+        },
+        {
+          type: 'image',
+          content:
+            'https://alpheratz-test.s3.ap-southeast-1.amazonaws.com/image/fire-2-hint.jpg',
+        },
+        {
+          type: 'text',
+          content: '請輸入數字(四位數)',
         },
       ],
       reply: [
@@ -200,11 +218,63 @@ export const config: Config = {
           content:
             '勇士的智慧之眼帶領我們望向：百年歲月中，古老的建築餘下的一小片磚牆以及眼前的建築。站在門前仰望，山牆上的圖騰究竟是什麼？',
         },
+        {
+          type: 'text',
+          content: '請輸入中文兩個字（你可以先google看看「山牆」是什麼）',
+        },
       ],
       reply: [
         {
           type: 'pass',
           keyword: '校徽',
+        },
+      ],
+    },
+    {
+      prevStage: 'fire-1',
+      stage: 'fire-2',
+      message: [
+        {
+          type: 'image',
+          content:
+            'https://alpheratz-test.s3.ap-southeast-1.amazonaws.com/image/fire-3-badge.jpg',
+        },
+        {
+          type: 'text',
+          content:
+            '抹去校徽的文字，剩下三片竹葉的浮雕在眼前建築的兩側。究竟被抹去的文字是什麼？',
+        },
+        {
+          type: 'text',
+          content:
+            '請輸入中文兩字\n（可以google）\n（如果還是看不出來，請輸入「消失的文字」）',
+          quickReply: ['消失的文字'],
+        },
+      ],
+      reply: [
+        {
+          type: 'pass',
+          keyword: '女中',
+        },
+        {
+          type: 'pass',
+          keyword: '中女',
+        },
+        {
+          type: 'pass',
+          keyword: '女、中',
+        },
+        {
+          type: 'pass',
+          keyword: '中、女',
+        },
+        {
+          type: 'pass',
+          keyword: '女，中',
+        },
+        {
+          type: 'pass',
+          keyword: '中，女',
         },
         {
           type: 'hint',
@@ -215,27 +285,249 @@ export const config: Config = {
               content:
                 '竹女的校徽，三片竹葉代表的是新竹。中間有一個字，旁邊剩下的三組線條，合起來也是一個字。',
             },
+            {
+              type: 'text',
+              content:
+                '（如果你還是不知道這兩個字是什麼，請輸入「告訴我消失的文字」）',
+              quickReply: ['告訴我消失的文字'],
+            },
+          ],
+        },
+        {
+          type: 'hint',
+          keyword: '告訴我消失的文字',
+          message: [
+            {
+              type: 'text',
+              content: '女中',
+            },
+            {
+              type: 'image',
+              content:
+                'https://alpheratz-test.s3.ap-southeast-1.amazonaws.com/image/fire-4-hint.jpg',
+              quickReply: ['女中'],
+            },
           ],
         },
       ],
     },
     {
-      prevStage: 'fire-1',
-      stage: 'fire-2',
+      prevStage: 'fire-2',
+      stage: 'fire-3',
       message: [
         {
           type: 'text',
-          content: 'last stage of fire',
+          content:
+            '看著三片葉子的浮雕，這裡遺留了一扇門，左右的門牌沒有留下地址。左側留白，右側的門牌指引方向，只是被指向的小燈不曾照亮來往的人。（請輸入「燈+顯示的英文字」）',
+        },
+        {
+          type: 'text',
+          content: '（如果你找不到請輸入「我迷路了」）',
+          quickReply: ['我迷路了'],
         },
       ],
       reply: [
         {
           type: 'pass',
-          keyword: 'gogogo',
+          keyword: '燈x',
+        },
+        {
+          type: 'pass',
+          keyword: '燈+x',
+        },
+        {
+          type: 'hint',
+          keyword: '我迷路了',
+          message: [
+            {
+              type: 'image',
+              content:
+                'https://alpheratz-test.s3.ap-southeast-1.amazonaws.com/image/fire-5-door.jpg',
+            },
+            {
+              type: 'text',
+              content:
+                '看出箭頭指向哪個英文字母了嗎？\n（請輸入「燈+英文字母」）',
+            },
+            {
+              type: 'text',
+              content: '（如果你還是看不出英文字母，請輸入「我看不懂地圖」）',
+              quickReply: ['我看不懂地圖'],
+            },
+          ],
+        },
+        {
+          type: 'hint',
+          keyword: '我看不懂地圖',
           message: [
             {
               type: 'text',
-              content: '獲得火元素',
+              content: '答案為「燈x」',
+            },
+            {
+              type: 'image',
+              content:
+                'https://alpheratz-test.s3.ap-southeast-1.amazonaws.com/image/fire-6-door.jpg',
+              quickReply: ['燈x'],
+            },
+          ],
+        },
+      ],
+    },
+    {
+      prevStage: 'fire-3',
+      stage: 'fire-4',
+      message: [
+        {
+          type: 'text',
+          content:
+            '忽然間，你手上的火元素碎片劇烈震動。轉瞬間，伴隨著巨大的光芒，失落的火元素在你手上熠熠重現。',
+        },
+        {
+          type: 'image',
+          content:
+            'https://alpheratz-test.s3.ap-southeast-1.amazonaws.com/image/fire-7-block.jpg',
+        },
+        {
+          type: 'text',
+          content:
+            '山牆上被抹去的字出現在你的眼前，兩字之間形成一條「穿越四面」的路徑。將路燈上的字母放置於地上，俯視這耀眼的路徑，你是否看到往前的方向？（請輸入一個中文字）',
+        },
+        {
+          type: 'text',
+          content: '（注意：內外側不同。從四面體的內部往外看，字是正向的。）',
+        },
+        {
+          type: 'text',
+          content:
+            '（除非你能從迷霧中看清方向，否則請輸入「火之迷宮」，直接進入一窺究竟吧）',
+          quickReply: ['火之迷宮'],
+        },
+      ],
+      reply: [
+        {
+          type: 'pass',
+          keyword: '去',
+          message: [
+            {
+              type: 'text',
+              content:
+                '原來，記憶不曾被人遺忘。也許能抹去表面的文字，卻抹不去歷史的印痕。',
+            },
+            {
+              type: 'text',
+              content:
+                '照耀我們前面道路的，不只有發光的燈，也有發人深省的文字。',
+            },
+            {
+              type: 'text',
+              content:
+                '火炬仍在流傳。即使百年前的學生今已離去，今日仍有許多的人接下這棒，我們承接歷史，也創造歷史。\n\n劇情觸發：「獲得火元素」',
+            },
+            {
+              type: 'image',
+              content:
+                'https://alpheratz-test.s3.ap-southeast-1.amazonaws.com/image/fire-12-get.jpg',
+            },
+          ],
+        },
+        {
+          type: 'hint',
+          keyword: '火之迷宮',
+          message: [
+            {
+              type: 'text',
+              content:
+                '請按照以下步驟操作：\n1. 將四面體用適當的方式拼湊起來，使「女」和「中」這兩個字之間形成一條「通過四個面的最短路徑」\n2. 將該條路徑用「水性螢光筆」著色，路徑請塗滿，太細不易分辨\n3. 將x置於底部，從正上方俯視，會發現路徑形成一個中文字\n（俯視圖如下圖所示）',
+            },
+            {
+              type: 'image',
+              content:
+                'https://alpheratz-test.s3.ap-southeast-1.amazonaws.com/image/fire-8-hint.jpg',
+            },
+            {
+              type: 'text',
+              content:
+                '（如果你還是走不出這個迷宮，可以依照你的能力，輸入「從哪裡切入比較容易」、「關閉一些錯誤的路口」、「直接顯示路徑」、「我放棄，給我展開圖」）',
+              quickReply: [
+                '從哪裡切入比較容易',
+                '關閉一些錯誤的路口',
+                '直接顯示路徑',
+                '我放棄，給我展開圖',
+              ],
+            },
+          ],
+        },
+        {
+          type: 'hint',
+          keyword: '從哪裡切入比較容易',
+          message: [
+            {
+              type: 'text',
+              content:
+                '建議先用展開圖（四片三角形，拼成一個大三角形）擺設，從「女」出發開始連路徑會比較簡單，每個面都必須經過，而且有些面會重複經過。',
+            },
+            {
+              type: 'text',
+              content:
+                '（注意，連完後，拼出四面體時，從內部往外看的字必須是正的。它的內外側有分別）',
+              quickReply: [
+                '關閉一些錯誤的路口',
+                '直接顯示路徑',
+                '我放棄，給我展開圖',
+              ],
+            },
+          ],
+        },
+        {
+          type: 'hint',
+          keyword: '關閉一些錯誤的路口',
+          message: [
+            {
+              type: 'image',
+              content:
+                'https://alpheratz-test.s3.ap-southeast-1.amazonaws.com/image/fire-9-hint.jpg',
+              quickReply: ['直接顯示路徑', '我放棄，給我展開圖'],
+            },
+          ],
+        },
+        {
+          type: 'hint',
+          keyword: '直接顯示路徑',
+          message: [
+            {
+              type: 'image',
+              content:
+                'https://alpheratz-test.s3.ap-southeast-1.amazonaws.com/image/fire-10-hint.jpg',
+              quickReply: ['我放棄，給我展開圖'],
+            },
+          ],
+        },
+        {
+          type: 'hint',
+          keyword: '我放棄，給我展開圖',
+          message: [
+            {
+              type: 'image',
+              content:
+                'https://alpheratz-test.s3.ap-southeast-1.amazonaws.com/image/fire-11-hint.jpg',
+            },
+            {
+              type: 'text',
+              content:
+                '如果你看不出字，請注意是否內外側弄反。或是你也可以輸入「給我答案吧QQ」',
+              quickReply: ['給我答案吧QQ'],
+            },
+          ],
+        },
+        {
+          type: 'hint',
+          keyword: '給我答案吧QQ',
+          message: [
+            {
+              type: 'text',
+              content: '答案是「去」',
+              quickReply: ['去'],
             },
           ],
         },
@@ -299,6 +591,207 @@ export const config: Config = {
         {
           type: 'pass',
           keyword: 'gogogo-water',
+          message: [
+            {
+              type: 'text',
+              content: '獲得水元素',
+            },
+          ],
+        },
+      ],
+    },
+  ],
+  earth: [
+    {
+      prevStage: null,
+      stage: 'earth-0',
+      message: [
+        {
+          type: 'text',
+          content: '「水1，走出洞穴與原始，啟動知識與文明。」',
+        },
+      ],
+      reply: [
+        {
+          type: 'pass',
+          keyword: '10489',
+        },
+      ],
+    },
+    {
+      prevStage: 'earth-0',
+      stage: 'earth-1',
+      message: [
+        {
+          type: 'text',
+          content:
+            '勇士的智慧之眼帶領我們望向：百年歲月中，古老的建築餘下的一小片磚牆以及眼前的建築。站在門前仰望，山牆上的圖騰究竟是什麼？',
+        },
+      ],
+      reply: [
+        {
+          type: 'pass',
+          keyword: '校111',
+        },
+        {
+          type: 'hint',
+          keyword: 'no~~~q',
+          message: [
+            {
+              type: 'text',
+              content: '答案是什麼呢',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      prevStage: 'earth-1',
+      stage: 'earth-2',
+      message: [
+        {
+          type: 'text',
+          content: 'last stage of earth',
+        },
+      ],
+      reply: [
+        {
+          type: 'pass',
+          keyword: 'gogogo-earth',
+          message: [
+            {
+              type: 'text',
+              content: '獲得earth元素',
+            },
+          ],
+        },
+      ],
+    },
+  ],
+  air: [
+    {
+      prevStage: null,
+      stage: 'air-0',
+      message: [
+        {
+          type: 'text',
+          content: '「air，走出洞穴與原始，啟動知識與文明。」',
+        },
+      ],
+      reply: [
+        {
+          type: 'pass',
+          keyword: '10489',
+        },
+      ],
+    },
+    {
+      prevStage: 'air-0',
+      stage: 'air-1',
+      message: [
+        {
+          type: 'text',
+          content:
+            '勇2士的智慧之眼帶領我們望向：百年歲月中，古老的建築餘下的一小片磚牆以及眼前的建築。站在門前仰望，山牆上的圖騰究竟是什麼？',
+        },
+      ],
+      reply: [
+        {
+          type: 'pass',
+          keyword: '校sd',
+        },
+        {
+          type: 'hint',
+          keyword: 'no~aq1~~',
+          message: [
+            {
+              type: 'text',
+              content: '答案是什麼呢',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      prevStage: 'air-1',
+      stage: 'air-2',
+      message: [
+        {
+          type: 'text',
+          content: 'last stage of air',
+        },
+      ],
+      reply: [
+        {
+          type: 'pass',
+          keyword: 'gogogo-air',
+          message: [
+            {
+              type: 'text',
+              content: '獲得air元素',
+            },
+          ],
+        },
+      ],
+    },
+  ],
+  aether: [
+    {
+      prevStage: null,
+      stage: 'aether-0',
+      message: [
+        {
+          type: 'text',
+          content: '「aether，走出洞穴與原始，啟動知識與文明。」',
+        },
+      ],
+      reply: [
+        {
+          type: 'pass',
+          keyword: '10489',
+        },
+      ],
+    },
+    {
+      prevStage: 'aether-0',
+      stage: 'aether-1',
+      message: [
+        {
+          type: 'text',
+          content:
+            '勇士的智慧之眼帶領我們望向：百年歲月中，古老的建築餘下的一小片磚牆以及眼前的建築。站在門前仰望，山牆上的圖騰究竟是什麼？',
+        },
+      ],
+      reply: [
+        {
+          type: 'pass',
+          keyword: '校',
+        },
+        {
+          type: 'hint',
+          keyword: 'no~~~',
+          message: [
+            {
+              type: 'text',
+              content: '答案是什麼呢',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      prevStage: 'aether-1',
+      stage: 'aether-2',
+      message: [
+        {
+          type: 'text',
+          content: 'last stage of aether',
+        },
+      ],
+      reply: [
+        {
+          type: 'pass',
+          keyword: 'gogogo-aether',
           message: [
             {
               type: 'text',

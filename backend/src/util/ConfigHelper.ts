@@ -19,8 +19,8 @@ export const toLineMessage = (messages: ConfigMessage[]): Message[] => {
     else
       return {
         type: 'image',
-        originalContentUrl: `https://${process.env.PROJECT}-${process.env.ENVR}.s3.ap-southeast-1.amazonaws.com/image/${v.content}`,
-        previewImageUrl: `https://${process.env.PROJECT}-${process.env.ENVR}.s3.ap-southeast-1.amazonaws.com/image/${v.content}`,
+        originalContentUrl: v.content,
+        previewImageUrl: v.content,
         quickReply: v.quickReply ? generateQuickReply(v.quickReply) : undefined,
       };
   });

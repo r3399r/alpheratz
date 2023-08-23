@@ -83,6 +83,9 @@ export class ChatService {
     }
   }
 
+  private getReplyOfStage = (stage: Stage) =>
+    stage.reply?.find((v) => v.keyword.toLowerCase() === this.message);
+
   private getNotPassMessageLog(type: 'hint' | 'fail') {
     const log = new LogEntity();
     log.user = this.user;
@@ -145,24 +148,38 @@ export class ChatService {
     }
   }
 
-  private handleFireStages(
-    currentStage: Stage | undefined,
-    nextStage: Stage | undefined
+  private handleMinorStages(
+    name: 'fire' | 'water' | 'earth' | 'air' | 'aether',
+    stage: string | null
   ): HandledItem {
+    const mapping = {
+      fire: '火',
+      water: '水',
+      earth: '土',
+      air: '風',
+      aether: '乙太',
+    };
+    const currentStage = config[name].find((v) => v.stage === stage);
+    const nextStage = config[name].find((v) => v.prevStage === stage);
+
     if (
       currentStage === undefined &&
       nextStage !== undefined &&
-      this.message === '火'
+      this.message === mapping[name]
     ) {
       // init stage
-      this.user.fireStage = nextStage.stage;
+      if (name === 'fire') this.user.fireStage = nextStage.stage;
+      if (name === 'water') this.user.waterStage = nextStage.stage;
+      if (name === 'earth') this.user.earthStage = nextStage.stage;
+      if (name === 'air') this.user.airStage = nextStage.stage;
+      if (name === 'aether') this.user.aetherStage = nextStage.stage;
 
       const log = new LogEntity();
       log.user = this.user;
       log.action = 'message';
       log.message = this.message;
       log.type = 'pass';
-      log.attribute = 'fire_stage';
+      log.attribute = `${name}_stage`;
       log.newValue = nextStage.stage;
 
       return {
@@ -172,19 +189,21 @@ export class ChatService {
       };
     } else if (currentStage !== undefined && nextStage !== undefined) {
       // middle stages
-      const reply = currentStage.reply?.find(
-        (v) => v.keyword.toLowerCase() === this.message
-      );
+      const reply = this.getReplyOfStage(currentStage);
       if (reply?.type !== 'pass') return this.handleNotPassMessage(reply);
       else {
-        this.user.fireStage = nextStage.stage;
+        if (name === 'fire') this.user.fireStage = nextStage.stage;
+        if (name === 'water') this.user.waterStage = nextStage.stage;
+        if (name === 'earth') this.user.earthStage = nextStage.stage;
+        if (name === 'air') this.user.airStage = nextStage.stage;
+        if (name === 'aether') this.user.aetherStage = nextStage.stage;
 
         const log = new LogEntity();
         log.user = this.user;
         log.action = 'message';
         log.message = this.message;
         log.type = 'pass';
-        log.attribute = 'fire_stage';
+        log.attribute = `${name}_stage`;
         log.oldValue = currentStage.stage;
         log.newValue = nextStage.stage;
 
@@ -196,95 +215,21 @@ export class ChatService {
       }
     } else if (currentStage !== undefined && nextStage === undefined) {
       // last stage
-      const reply = currentStage.reply?.find(
-        (v) => v.keyword.toLowerCase() === this.message
-      );
+      const reply = this.getReplyOfStage(currentStage);
       if (reply?.type !== 'pass') return this.handleNotPassMessage(reply);
       else {
-        this.user.fireStage = 'complete';
+        if (name === 'fire') this.user.fireStage = 'complete';
+        if (name === 'water') this.user.waterStage = 'complete';
+        if (name === 'earth') this.user.earthStage = 'complete';
+        if (name === 'air') this.user.airStage = 'complete';
+        if (name === 'aether') this.user.aetherStage = 'complete';
 
         const log = new LogEntity();
         log.user = this.user;
         log.action = 'message';
         log.message = this.message;
         log.type = 'pass';
-        log.attribute = 'fire_stage';
-        log.oldValue = currentStage.stage;
-        log.newValue = 'complete';
-
-        return {
-          status: 'complete',
-          messageToSend: reply.message ? toLineMessage(reply.message) : null,
-          logToSave: log,
-        };
-      }
-    } else return this.handleNotPassMessage();
-  }
-
-  private handleWaterStages(
-    currentStage: Stage | undefined,
-    nextStage: Stage | undefined
-  ): HandledItem {
-    if (
-      currentStage === undefined &&
-      nextStage !== undefined &&
-      this.message === '水'
-    ) {
-      // init stage
-      this.user.waterStage = nextStage.stage;
-
-      const log = new LogEntity();
-      log.user = this.user;
-      log.action = 'message';
-      log.message = this.message;
-      log.type = 'pass';
-      log.attribute = 'water_stage';
-      log.newValue = nextStage.stage;
-
-      return {
-        status: 'pass',
-        messageToSend: toLineMessage(nextStage.message),
-        logToSave: log,
-      };
-    } else if (currentStage !== undefined && nextStage !== undefined) {
-      // middle stages
-      const reply = currentStage.reply?.find(
-        (v) => v.keyword.toLowerCase() === this.message
-      );
-      if (reply?.type !== 'pass') return this.handleNotPassMessage(reply);
-      else {
-        this.user.waterStage = nextStage.stage;
-
-        const log = new LogEntity();
-        log.user = this.user;
-        log.action = 'message';
-        log.message = this.message;
-        log.type = 'pass';
-        log.attribute = 'water_stage';
-        log.oldValue = currentStage.stage;
-        log.newValue = nextStage.stage;
-
-        return {
-          status: 'pass',
-          messageToSend: toLineMessage(nextStage.message),
-          logToSave: log,
-        };
-      }
-    } else if (currentStage !== undefined && nextStage === undefined) {
-      // last stage
-      const reply = currentStage.reply?.find(
-        (v) => v.keyword.toLowerCase() === this.message
-      );
-      if (reply?.type !== 'pass') return this.handleNotPassMessage(reply);
-      else {
-        this.user.waterStage = 'complete';
-
-        const log = new LogEntity();
-        log.user = this.user;
-        log.action = 'message';
-        log.message = this.message;
-        log.type = 'pass';
-        log.attribute = 'water_stage';
+        log.attribute = `${name}_stage`;
         log.oldValue = currentStage.stage;
         log.newValue = 'complete';
 
@@ -330,32 +275,34 @@ export class ChatService {
 
         const fireStage = this.user.fireStage;
         const waterStage = this.user.waterStage;
-        const currentFireStage = config.fire.find((v) => v.stage === fireStage);
-        const nextFireStage = config.fire.find(
-          (v) => v.prevStage === fireStage
-        );
-        const currentWaterStage = config.water.find(
-          (v) => v.stage === waterStage
-        );
-        const nextWaterStage = config.water.find(
-          (v) => v.prevStage === waterStage
-        );
+        const earthStage = this.user.earthStage;
+        const airStage = this.user.airStage;
+        const aetherStage = this.user.aetherStage;
 
         if (fireStage !== 'complete') {
-          const fireRes = this.handleFireStages(
-            currentFireStage,
-            nextFireStage
-          );
-          if (fireRes.status !== 'complete') incompleteStages += 1;
-          handledItems.push(fireRes);
+          const item = this.handleMinorStages('fire', fireStage);
+          if (item.status !== 'complete') incompleteStages += 1;
+          handledItems.push(item);
         }
         if (waterStage !== 'complete') {
-          const waterRes = this.handleWaterStages(
-            currentWaterStage,
-            nextWaterStage
-          );
-          if (waterRes.status !== 'complete') incompleteStages += 1;
-          handledItems.push(waterRes);
+          const item = this.handleMinorStages('water', waterStage);
+          if (item.status !== 'complete') incompleteStages += 1;
+          handledItems.push(item);
+        }
+        if (earthStage !== 'complete') {
+          const item = this.handleMinorStages('earth', earthStage);
+          if (item.status !== 'complete') incompleteStages += 1;
+          handledItems.push(item);
+        }
+        if (airStage !== 'complete') {
+          const item = this.handleMinorStages('air', airStage);
+          if (item.status !== 'complete') incompleteStages += 1;
+          handledItems.push(item);
+        }
+        if (aetherStage !== 'complete') {
+          const item = this.handleMinorStages('aether', aetherStage);
+          if (item.status !== 'complete') incompleteStages += 1;
+          handledItems.push(item);
         }
 
         if (handledItems.length === 0)
