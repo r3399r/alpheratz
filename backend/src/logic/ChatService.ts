@@ -40,8 +40,12 @@ export class ChatService {
       const firstStage = config.main.find((v) => v.prevStage === null);
       if (firstStage === undefined) throw new Error('first stage not found');
 
+      const profile = await this.client.getProfile(userId);
+
       const follower = new UserEntity();
       follower.id = userId;
+      follower.name = profile.displayName;
+      follower.pictureUrl = profile.pictureUrl ?? null;
       follower.follow = true;
       follower.mainStage = firstStage.stage;
       await this.userAccess.save(follower);

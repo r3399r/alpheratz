@@ -1,5 +1,7 @@
 CREATE TABLE "user" (
 	id STRING NOT NULL,
+    "name" STRING NOT NULL,
+    picture_url STRING NULL,
 	follow BOOLEAN NOT NULL,
     main_stage STRING NOT NULL,
     fire_stage STRING NULL,

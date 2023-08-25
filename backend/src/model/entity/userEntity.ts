@@ -2,6 +2,8 @@ import { BeforeInsert, BeforeUpdate, Column, Entity } from 'typeorm';
 
 export type User = {
   id: string;
+  name: string;
+  pictureUrl: string | null;
   follow: boolean;
   mainStage: string;
   fireStage: string | null;
@@ -17,6 +19,12 @@ export type User = {
 export class UserEntity implements User {
   @Column({ primary: true, type: 'text' })
   id!: string;
+
+  @Column({ type: 'text' })
+  name!: string;
+
+  @Column({ type: 'text', name: 'picture_url', default: null })
+  pictureUrl: string | null = null;
 
   @Column({ type: 'boolean' })
   follow!: boolean;
