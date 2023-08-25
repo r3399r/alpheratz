@@ -9,7 +9,8 @@
     ],
     "parser": "@typescript-eslint/parser",
     "plugins": ["@typescript-eslint"],
-    "rules": {
+  "ignorePatterns": ["src/model/backend/*"],
+  "rules": {
       "arrow-body-style": ["error", "as-needed"],
       "curly": ["error", "multi"],
       "import/order": [

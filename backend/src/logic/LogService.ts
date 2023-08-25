@@ -19,6 +19,6 @@ export class LogService {
   }
 
   public async getLogs(): Promise<GetLogResponse> {
-    return await this.logAccess.find();
+    return await this.logAccess.find({order:{'createdAt': 'DESC'}});
   }
 }
