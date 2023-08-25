@@ -5,6 +5,7 @@ import chat from './routes/chat';
 import log from './routes/log';
 import user from './routes/user';
 import { errorOutput } from './util/lambdaHelper';
+import { GetLogParams } from './model/api';
 
 export const handler = async (event: LambdaEvent, _context?: LambdaContext) => {
   console.log(event);
@@ -16,7 +17,7 @@ export const handler = async (event: LambdaEvent, _context?: LambdaContext) => {
     case '/api/user':
       return await user();
     case '/api/log':
-      return await log();
+      return await log(event.queryStringParameters as GetLogParams | null);
   }
 
   return errorOutput(new HttpError(400, 'Invalid resource'));

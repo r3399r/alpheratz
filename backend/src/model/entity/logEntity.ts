@@ -15,6 +15,7 @@ type Type = 'pass' | 'fail' | 'hint';
 
 export type Log = {
   id: string;
+  userId:string
   user: User;
   action: Action;
   message: string | null;
@@ -31,6 +32,9 @@ export class LogEntity {
   @Column({ primary: true })
   @Generated('uuid')
   id!: string;
+
+  @Column({ name: 'user_id' })
+  userId!: string;
 
   @ManyToOne(() => UserEntity)
   @JoinColumn({ name: 'user_id' })

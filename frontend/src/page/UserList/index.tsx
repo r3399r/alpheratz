@@ -1,10 +1,18 @@
-import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent } from '@mui/material';
+import {
+  Button,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Pagination,
+  Select,
+  SelectChangeEvent,
+} from '@mui/material';
 import { format } from 'date-fns';
-import { useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import IcAvatar from 'src/image/avatar.png';
 import { Log } from 'src/model/backend/model/entity/logEntity';
 import { User } from 'src/model/backend/model/entity/userEntity';
-import { getData } from 'src/service/userSerice';
+import { getLog, getUser } from 'src/service/userService';
 
 const mappingAction = {
   follow: '加好友',
@@ -18,53 +26,84 @@ const mappingType = {
   hint: '提示',
 };
 
+const DEFAULT_LIMIT = 50;
+
 const UserList = () => {
   const [log, setLog] = useState<Log[]>();
   const [user, setUser] = useState<User[]>();
-  const [selected, setSeclted] = useState<string>('');
+  const [selected, setSelected] = useState<string>('');
+  const [page, setPage] = useState<number>(1);
+  const [offset, setOffset] = useState<number>(0);
+  const [count, setCount] = useState<number>();
 
   useEffect(() => {
-    getData().then((res) => {
-      setLog(res.log);
-      setUser(res.user);
-    });
+    getUser().then((res) => setUser(res));
   }, []);
 
+  useEffect(() => {
+    getLog({ limit: String(DEFAULT_LIMIT), offset: String(offset), userId: selected }).then(
+      (res) => {
+        setLog(res.log);
+        setCount(res.count);
+      },
+    );
+  }, [selected, offset]);
+
   const handleChange = (event: SelectChangeEvent) => {
-    setSeclted(event.target.value as string);
+    setSelected(event.target.value as string);
   };
 
-  const onClick = (id: string) => () => {
-    setSeclted(id);
+  const onReset = () => {
+    setSelected('');
+    setPage(1);
+    setOffset(0);
   };
 
-  if (!user || !log) return <>loading...</>;
+  const onClickUser = (id: string) => () => {
+    setSelected(id);
+    setPage(1);
+    setOffset(0);
+  };
+
+  const handlePaginationChange = (event: ChangeEvent<unknown>, value: number) => {
+    setPage(value);
+    setOffset((value - 1) * DEFAULT_LIMIT);
+  };
+
+  if (!user || !log || !count) return <></>;
 
   return (
     <div className="m-4">
-      <div className="w-[300px]">
-        <FormControl fullWidth>
-          <InputLabel id="demo-simple-select-label">玩家</InputLabel>
-          <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            value={selected}
-            label="玩家"
-            onChange={handleChange}
-          >
-            {user.map((v) => (
-              <MenuItem key={v.id} value={v.id}>
-                <div className="flex items-center gap-2">
-                  <img
-                    src={v.pictureUrl ?? IcAvatar}
-                    className="max-w-[24px] rounded-full object-cover"
-                  />
-                  <div>{v.name}</div>
-                </div>
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
+      <div className="flex items-center gap-4">
+        <div className="w-[300px]">
+          <FormControl fullWidth>
+            <InputLabel id="demo-simple-select-label">玩家</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={selected}
+              label="玩家"
+              onChange={handleChange}
+            >
+              {user.map((v) => (
+                <MenuItem key={v.id} value={v.id}>
+                  <div className="flex items-center gap-2">
+                    <img
+                      src={v.pictureUrl ?? IcAvatar}
+                      className="max-w-[24px] rounded-full object-cover"
+                    />
+                    <div>{v.name}</div>
+                  </div>
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </div>
+        <div>
+          <Button variant="outlined" onClick={onReset}>
+            Reset
+          </Button>
+        </div>
       </div>
       <div className="mt-4 flex flex-col gap-2 rounded bg-red-50/60">
         <div className="flex items-center gap-2 p-2 text-center font-bold">
@@ -78,7 +117,7 @@ const UserList = () => {
         </div>
         <div className="h-px bg-gray-300" />
         {log.map((v, i) => (
-          <div key={v.id} onClick={onClick(v.user.id)} className="cursor-pointer">
+          <div key={v.id} onClick={onClickUser(v.user.id)} className="cursor-pointer">
             <div className="flex items-center gap-2 p-2 text-center">
               <div className="flex w-1/6 items-center gap-2">
                 <img
@@ -99,6 +138,13 @@ const UserList = () => {
             {i !== log.length - 1 && <div className="h-px bg-gray-300" />}
           </div>
         ))}
+      </div>
+      <div className="mt-4 flex justify-center">
+        <Pagination
+          count={Math.ceil(count / DEFAULT_LIMIT)}
+          page={page}
+          onChange={handlePaginationChange}
+        />
       </div>
     </div>
   );
