@@ -105,8 +105,8 @@ const UserList = () => {
           </Button>
         </div>
       </div>
-      <div className="mt-4 flex flex-col gap-2 rounded bg-red-50/60">
-        <div className="flex items-center gap-2 p-2 text-center font-bold">
+      <div className="mt-4 rounded bg-red-50/60">
+        <div className="flex items-center gap-2 p-2 font-bold">
           <div className="w-1/6">玩家</div>
           <div className="w-1/12">動作</div>
           <div className="w-1/12">類別</div>
@@ -118,7 +118,7 @@ const UserList = () => {
         <div className="h-px bg-gray-300" />
         {log.map((v, i) => (
           <div key={v.id} onClick={onClickUser(v.user.id)} className="cursor-pointer">
-            <div className="flex items-center gap-2 p-2 text-center">
+            <div className="flex items-center gap-2 p-2">
               <div className="flex w-1/6 items-center gap-2">
                 <img
                   src={v.user.pictureUrl ?? IcAvatar}
