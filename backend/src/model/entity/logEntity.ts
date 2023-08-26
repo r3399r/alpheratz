@@ -15,7 +15,7 @@ type Type = 'pass' | 'fail' | 'hint';
 
 export type Log = {
   id: string;
-  userId:string
+  userId: string;
   user: User;
   action: Action;
   message: string | null;

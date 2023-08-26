@@ -1,12 +1,5 @@
-import { ImageMessage, Message, QuickReply, TextMessage } from '@line/bot-sdk';
-import { Message as ConfigMessage } from 'src/constant/config';
-
-const generateQuickReply = (quickReply: string[]): QuickReply => ({
-  items: quickReply.map((v) => ({
-    type: 'action',
-    action: { type: 'message', label: v, text: v },
-  })),
-});
+import { ImageMessage, Message, TextMessage } from '@line/bot-sdk';
+import { Message as ConfigMessage } from 'src/model/Config';
 
 export const toLineMessage = (messages: ConfigMessage[]): Message[] => {
   const res = messages.map((v): TextMessage | ImageMessage => {
@@ -14,14 +7,12 @@ export const toLineMessage = (messages: ConfigMessage[]): Message[] => {
       return {
         type: 'text',
         text: v.content,
-        quickReply: v.quickReply ? generateQuickReply(v.quickReply) : undefined,
       };
     else
       return {
         type: 'image',
         originalContentUrl: v.content,
         previewImageUrl: v.content,
-        quickReply: v.quickReply ? generateQuickReply(v.quickReply) : undefined,
       };
   });
 

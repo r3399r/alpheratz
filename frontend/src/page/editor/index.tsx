@@ -1,7 +1,9 @@
-import { Form } from '@rjsf/antd';
+import { Form } from '@rjsf/mui';
 import { RJSFSchema, UiSchema } from '@rjsf/utils';
 import validator from '@rjsf/validator-ajv8';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { Config } from 'src/model/backend/model/Config';
+import { getConfig } from 'src/service/configService';
 
 const MESSAGE: RJSFSchema = {
   title: '關卡訊息設定',
@@ -20,14 +22,14 @@ const MESSAGE: RJSFSchema = {
         type: 'string',
         title: '內容',
       },
-      quickReply: {
-        title: '快速回覆',
-        type: 'array',
-        items: {
-          type: 'string',
-          title: '內容',
-        },
-      },
+      // quickReply: {
+      //   title: '快速回覆',
+      //   type: 'array',
+      //   items: {
+      //     type: 'string',
+      //     title: '內容',
+      //   },
+      // },
     },
   },
 };
@@ -90,7 +92,7 @@ const STAGE_SCHEMA = {
   items: {
     prevStage: {
       'ui:emptyValue': null,
-      'ui:help': 'Hint: 若無則留白',
+      'ui:help': 'Hint: 若無請留白',
     },
     message: {
       items: {
@@ -112,7 +114,11 @@ const uiSchema: UiSchema = {
 };
 
 const Editor = () => {
-  const [formData, setFormData] = useState();
+  const [formData, setFormData] = useState<Config>();
+
+  useEffect(() => {
+    getConfig().then((res) => setFormData(res));
+  }, []);
 
   return (
     <div className="p-10">
@@ -123,7 +129,6 @@ const Editor = () => {
         onChange={(e) => setFormData(e.formData)}
         validator={validator}
         onSubmit={(e) => console.log(e.formData)}
-        onError={() => console.log('eee')}
       />
     </div>
   );

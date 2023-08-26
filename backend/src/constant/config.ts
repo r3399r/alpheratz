@@ -1,44 +1,46 @@
-export type Message = {
-  type: 'text' | 'image';
-  content: string;
-  quickReply?: string[];
-};
+// export type Message = {
+//   type: 'text' | 'image';
+//   content: string;
+//   // quickReply?: string[];
+// };
 
-export type Reply = PassReply | HintReply | FailReply;
+import { Config } from 'src/model/Config';
 
-type PassReply = {
-  type: 'pass';
-  keyword: string;
-  message?: Message[];
-};
+// export type Reply = PassReply | HintReply | FailReply;
 
-type HintReply = {
-  type: 'hint';
-  keyword: string;
-  message: Message[];
-};
+// type PassReply = {
+//   type: 'pass';
+//   keyword: string;
+//   message?: Message[];
+// };
 
-type FailReply = {
-  type: 'fail';
-  keyword: string;
-  message: Message[];
-};
+// type HintReply = {
+//   type: 'hint';
+//   keyword: string;
+//   message: Message[];
+// };
 
-export type Stage = {
-  prevStage: string | null;
-  stage: string;
-  message: Message[];
-  reply?: Reply[];
-};
+// type FailReply = {
+//   type: 'fail';
+//   keyword: string;
+//   message: Message[];
+// };
 
-type Config = {
-  main: Stage[];
-  fire: Stage[];
-  water: Stage[];
-  earth: Stage[];
-  air: Stage[];
-  aether: Stage[];
-};
+// export type Stage = {
+//   prevStage: string | null;
+//   stage: string;
+//   message: Message[];
+//   reply?: Reply[];
+// };
+
+// type Config = {
+//   main: Stage[];
+//   fire: Stage[];
+//   water: Stage[];
+//   earth: Stage[];
+//   air: Stage[];
+//   aether: Stage[];
+// };
 
 export const config: Config = {
   main: [
@@ -64,7 +66,7 @@ export const config: Config = {
           type: 'text',
           content:
             '隨著時間的流逝，元素的光芒漸顯黯淡。來自遠方的旅人阿，可否借助你力，讓這失落的元素再顯從前的光芒？請輸入「可以」、或是「不可以」',
-          quickReply: ['可以', '不可以'],
+          // quickReply: ['可以', '不可以'],
         },
       ],
       reply: [
@@ -80,7 +82,7 @@ export const config: Config = {
               type: 'text',
               content:
                 '寶藏與秘密，只顯與那些願意追尋、勇敢承擔的勇士。\n你可以無視，但埋藏的秘密你將無法知曉。\n（輸入「可以」，你還是可以反悔）',
-              quickReply: ['可以'],
+              // quickReply: ['可以'],
             },
           ],
         },
@@ -135,7 +137,7 @@ export const config: Config = {
           type: 'image',
           content:
             'https://alpheratz-test.s3.ap-southeast-1.amazonaws.com/public/image/main-2-map.jpg',
-          quickReply: ['風', '火', '土', '水', '以太'],
+          // quickReply: ['風', '火', '土', '水', '以太'],
         },
       ],
     },
@@ -248,7 +250,7 @@ export const config: Config = {
           type: 'text',
           content:
             '請輸入中文兩字\n（可以google）\n（如果還是看不出來，請輸入「消失的文字」）',
-          quickReply: ['消失的文字'],
+          // quickReply: ['消失的文字'],
         },
       ],
       reply: [
@@ -289,7 +291,7 @@ export const config: Config = {
               type: 'text',
               content:
                 '（如果你還是不知道這兩個字是什麼，請輸入「告訴我消失的文字」）',
-              quickReply: ['告訴我消失的文字'],
+              // quickReply: ['告訴我消失的文字'],
             },
           ],
         },
@@ -305,7 +307,7 @@ export const config: Config = {
               type: 'image',
               content:
                 'https://alpheratz-test.s3.ap-southeast-1.amazonaws.com/public/image/fire-4-hint.jpg',
-              quickReply: ['女中'],
+              // quickReply: ['女中'],
             },
           ],
         },
@@ -323,7 +325,7 @@ export const config: Config = {
         {
           type: 'text',
           content: '（如果你找不到請輸入「我迷路了」）',
-          quickReply: ['我迷路了'],
+          // quickReply: ['我迷路了'],
         },
       ],
       reply: [
@@ -352,7 +354,7 @@ export const config: Config = {
             {
               type: 'text',
               content: '（如果你還是看不出英文字母，請輸入「我看不懂地圖」）',
-              quickReply: ['我看不懂地圖'],
+              // quickReply: ['我看不懂地圖'],
             },
           ],
         },
@@ -368,7 +370,7 @@ export const config: Config = {
               type: 'image',
               content:
                 'https://alpheratz-test.s3.ap-southeast-1.amazonaws.com/public/image/fire-6-door.jpg',
-              quickReply: ['燈x'],
+              // quickReply: ['燈x'],
             },
           ],
         },
@@ -401,7 +403,7 @@ export const config: Config = {
           type: 'text',
           content:
             '（除非你能從迷霧中看清方向，否則請輸入「火之迷宮」，直接進入一窺究竟吧）',
-          quickReply: ['火之迷宮'],
+          // quickReply: ['火之迷宮'],
         },
       ],
       reply: [
@@ -449,12 +451,12 @@ export const config: Config = {
               type: 'text',
               content:
                 '（如果你還是走不出這個迷宮，可以依照你的能力，輸入「從哪裡切入比較容易」、「關閉一些錯誤的路口」、「直接顯示路徑」、「我放棄，給我展開圖」）',
-              quickReply: [
-                '從哪裡切入比較容易',
-                '關閉一些錯誤的路口',
-                '直接顯示路徑',
-                '我放棄，給我展開圖',
-              ],
+              // quickReply: [
+              //   '從哪裡切入比較容易',
+              //   '關閉一些錯誤的路口',
+              //   '直接顯示路徑',
+              //   '我放棄，給我展開圖',
+              // ],
             },
           ],
         },
@@ -471,11 +473,11 @@ export const config: Config = {
               type: 'text',
               content:
                 '（注意，連完後，拼出四面體時，從內部往外看的字必須是正的。它的內外側有分別）',
-              quickReply: [
-                '關閉一些錯誤的路口',
-                '直接顯示路徑',
-                '我放棄，給我展開圖',
-              ],
+              // quickReply: [
+              //   '關閉一些錯誤的路口',
+              //   '直接顯示路徑',
+              //   '我放棄，給我展開圖',
+              // ],
             },
           ],
         },
@@ -487,7 +489,7 @@ export const config: Config = {
               type: 'image',
               content:
                 'https://alpheratz-test.s3.ap-southeast-1.amazonaws.com/public/image/fire-9-hint.jpg',
-              quickReply: ['直接顯示路徑', '我放棄，給我展開圖'],
+              // quickReply: ['直接顯示路徑', '我放棄，給我展開圖'],
             },
           ],
         },
@@ -499,7 +501,7 @@ export const config: Config = {
               type: 'image',
               content:
                 'https://alpheratz-test.s3.ap-southeast-1.amazonaws.com/public/image/fire-10-hint.jpg',
-              quickReply: ['我放棄，給我展開圖'],
+              // quickReply: ['我放棄，給我展開圖'],
             },
           ],
         },
@@ -516,7 +518,7 @@ export const config: Config = {
               type: 'text',
               content:
                 '如果你看不出字，請注意是否內外側弄反。或是你也可以輸入「給我答案吧QQ」',
-              quickReply: ['給我答案吧QQ'],
+              // quickReply: ['給我答案吧QQ'],
             },
           ],
         },
@@ -527,7 +529,7 @@ export const config: Config = {
             {
               type: 'text',
               content: '答案是「去」',
-              quickReply: ['去'],
+              // quickReply: ['去'],
             },
           ],
         },

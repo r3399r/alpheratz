@@ -3,8 +3,13 @@ import { LambdaOutput } from 'src/model/Lambda';
 import { Pagination } from 'src/model/Pagination';
 
 export const successOutput = <T>(res?: T): LambdaOutput => {
-  if (res && 'paginate' in (res as unknown as Pagination<T>) && 'data' in (res as unknown as Pagination<T>)) {
+  if (
+    res &&
+    'paginate' in (res as unknown as Pagination<T>) &&
+    'data' in (res as unknown as Pagination<T>)
+  ) {
     const pagination = res as unknown as Pagination<T>;
+
     return {
       statusCode: 200,
       headers: {
@@ -16,14 +21,15 @@ export const successOutput = <T>(res?: T): LambdaOutput => {
       body: JSON.stringify(pagination.data),
     };
   }
-  return ({
+
+  return {
     statusCode: 200,
     headers: {
       'Access-Control-Allow-Origin': '*', // Required for CORS support to work,
     },
     body: JSON.stringify(res),
-  });
-}
+  };
+};
 
 export const errorOutput = (e: unknown): LambdaOutput => {
   const error: HttpError = e as HttpError;
