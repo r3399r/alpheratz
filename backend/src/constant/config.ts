@@ -58,7 +58,7 @@ export const config: Config = {
         {
           type: 'image',
           content:
-            'https://alpheratz-test.s3.ap-southeast-1.amazonaws.com/image/main-0-welcome.jpg',
+            'https://alpheratz-test.s3.ap-southeast-1.amazonaws.com/public/image/main-0-welcome.jpg',
         },
         {
           type: 'text',
@@ -119,7 +119,7 @@ export const config: Config = {
         {
           type: 'image',
           content:
-            'https://alpheratz-test.s3.ap-southeast-1.amazonaws.com/image/main-1-elements.jpg',
+            'https://alpheratz-test.s3.ap-southeast-1.amazonaws.com/public/image/main-1-elements.jpg',
         },
         {
           type: 'text',
@@ -134,7 +134,7 @@ export const config: Config = {
         {
           type: 'image',
           content:
-            'https://alpheratz-test.s3.ap-southeast-1.amazonaws.com/image/main-2-map.jpg',
+            'https://alpheratz-test.s3.ap-southeast-1.amazonaws.com/public/image/main-2-map.jpg',
           quickReply: ['風', '火', '土', '水', '以太'],
         },
       ],
@@ -185,7 +185,7 @@ export const config: Config = {
         {
           type: 'image',
           content:
-            'https://alpheratz-test.s3.ap-southeast-1.amazonaws.com/image/fire-1-map.jpg',
+            'https://alpheratz-test.s3.ap-southeast-1.amazonaws.com/public/image/fire-1-map.jpg',
         },
         {
           type: 'text',
@@ -195,7 +195,7 @@ export const config: Config = {
         {
           type: 'image',
           content:
-            'https://alpheratz-test.s3.ap-southeast-1.amazonaws.com/image/fire-2-hint.jpg',
+            'https://alpheratz-test.s3.ap-southeast-1.amazonaws.com/public/image/fire-2-hint.jpg',
         },
         {
           type: 'text',
@@ -237,7 +237,7 @@ export const config: Config = {
         {
           type: 'image',
           content:
-            'https://alpheratz-test.s3.ap-southeast-1.amazonaws.com/image/fire-3-badge.jpg',
+            'https://alpheratz-test.s3.ap-southeast-1.amazonaws.com/public/image/fire-3-badge.jpg',
         },
         {
           type: 'text',
@@ -304,7 +304,7 @@ export const config: Config = {
             {
               type: 'image',
               content:
-                'https://alpheratz-test.s3.ap-southeast-1.amazonaws.com/image/fire-4-hint.jpg',
+                'https://alpheratz-test.s3.ap-southeast-1.amazonaws.com/public/image/fire-4-hint.jpg',
               quickReply: ['女中'],
             },
           ],
@@ -342,7 +342,7 @@ export const config: Config = {
             {
               type: 'image',
               content:
-                'https://alpheratz-test.s3.ap-southeast-1.amazonaws.com/image/fire-5-door.jpg',
+                'https://alpheratz-test.s3.ap-southeast-1.amazonaws.com/public/image/fire-5-door.jpg',
             },
             {
               type: 'text',
@@ -367,7 +367,7 @@ export const config: Config = {
             {
               type: 'image',
               content:
-                'https://alpheratz-test.s3.ap-southeast-1.amazonaws.com/image/fire-6-door.jpg',
+                'https://alpheratz-test.s3.ap-southeast-1.amazonaws.com/public/image/fire-6-door.jpg',
               quickReply: ['燈x'],
             },
           ],
@@ -386,7 +386,7 @@ export const config: Config = {
         {
           type: 'image',
           content:
-            'https://alpheratz-test.s3.ap-southeast-1.amazonaws.com/image/fire-7-block.jpg',
+            'https://alpheratz-test.s3.ap-southeast-1.amazonaws.com/public/image/fire-7-block.jpg',
         },
         {
           type: 'text',
@@ -427,7 +427,7 @@ export const config: Config = {
             {
               type: 'image',
               content:
-                'https://alpheratz-test.s3.ap-southeast-1.amazonaws.com/image/fire-12-get.jpg',
+                'https://alpheratz-test.s3.ap-southeast-1.amazonaws.com/public/image/fire-12-get.jpg',
             },
           ],
         },
@@ -443,7 +443,7 @@ export const config: Config = {
             {
               type: 'image',
               content:
-                'https://alpheratz-test.s3.ap-southeast-1.amazonaws.com/image/fire-8-hint.jpg',
+                'https://alpheratz-test.s3.ap-southeast-1.amazonaws.com/public/image/fire-8-hint.jpg',
             },
             {
               type: 'text',
@@ -486,7 +486,7 @@ export const config: Config = {
             {
               type: 'image',
               content:
-                'https://alpheratz-test.s3.ap-southeast-1.amazonaws.com/image/fire-9-hint.jpg',
+                'https://alpheratz-test.s3.ap-southeast-1.amazonaws.com/public/image/fire-9-hint.jpg',
               quickReply: ['直接顯示路徑', '我放棄，給我展開圖'],
             },
           ],
@@ -498,7 +498,7 @@ export const config: Config = {
             {
               type: 'image',
               content:
-                'https://alpheratz-test.s3.ap-southeast-1.amazonaws.com/image/fire-10-hint.jpg',
+                'https://alpheratz-test.s3.ap-southeast-1.amazonaws.com/public/image/fire-10-hint.jpg',
               quickReply: ['我放棄，給我展開圖'],
             },
           ],
@@ -510,7 +510,7 @@ export const config: Config = {
             {
               type: 'image',
               content:
-                'https://alpheratz-test.s3.ap-southeast-1.amazonaws.com/image/fire-11-hint.jpg',
+                'https://alpheratz-test.s3.ap-southeast-1.amazonaws.com/public/image/fire-11-hint.jpg',
             },
             {
               type: 'text',
