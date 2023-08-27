@@ -163,7 +163,7 @@ export class ChatService {
       water: '水',
       earth: '土',
       air: '風',
-      aether: '乙太',
+      aether: '以太',
     };
     const currentIndex = this.config[name].findIndex((v) => v.stage === stage);
     const currentStage =

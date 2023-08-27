@@ -78,7 +78,7 @@ const UserList = () => {
     <div className="m-4">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
-          <div className="w-[300px]">
+          <div className="w-[180px]">
             <FormControl fullWidth>
               <InputLabel id="demo-simple-select-label">玩家</InputLabel>
               <Select
@@ -112,39 +112,41 @@ const UserList = () => {
           編輯關卡
         </Button>
       </div>
-      <div className="mt-4 rounded bg-red-50/60">
-        <div className="flex items-center gap-2 p-2 font-bold">
-          <div className="w-1/6">玩家</div>
-          <div className="w-1/12">動作</div>
-          <div className="w-1/12">類別</div>
-          <div className="w-1/6">訊息</div>
-          <div className="w-1/6">主線/支線</div>
-          <div className="w-1/6">關卡</div>
-          <div className="w-1/6">時間</div>
-        </div>
-        <div className="h-px bg-gray-300" />
-        {log.map((v, i) => (
-          <div key={v.id} onClick={onClickUser(v.user.id)} className="cursor-pointer">
-            <div className="flex items-center gap-2 p-2">
-              <div className="flex w-1/6 items-center gap-2">
-                <img
-                  src={v.user.pictureUrl ?? IcAvatar}
-                  className="max-w-[36px] rounded-full object-cover"
-                />
-                <div>{v.user.name}</div>
-              </div>
-              <div className="w-1/12">{mappingAction[v.action]}</div>
-              <div className="w-1/12">{v.type ? mappingType[v.type] : ''}</div>
-              <div className="w-1/6">{v.message}</div>
-              <div className="w-1/6">{v.attribute}</div>
-              <div className="w-1/6">{v.newValue}</div>
-              <div className="w-1/6">
-                {format(new Date(v.createdAt ?? ''), 'yyyy-MM-dd HH:mm:ss')}
-              </div>
-            </div>
-            {i !== log.length - 1 && <div className="h-px bg-gray-300" />}
+      <div className="min-w-[800px] overflow-x-auto">
+        <div className="mt-4 rounded bg-red-50/60">
+          <div className="flex items-center gap-2 p-2 font-bold">
+            <div className="w-1/6">玩家</div>
+            <div className="w-1/12">動作</div>
+            <div className="w-1/12">類別</div>
+            <div className="w-1/6">訊息</div>
+            <div className="w-1/6">主線/支線</div>
+            <div className="w-1/6">關卡</div>
+            <div className="w-1/6">時間</div>
           </div>
-        ))}
+          <div className="h-px bg-gray-300" />
+          {log.map((v, i) => (
+            <div key={v.id} onClick={onClickUser(v.user.id)} className="cursor-pointer">
+              <div className="flex items-center gap-2 p-2">
+                <div className="flex w-1/6 items-center gap-2">
+                  <img
+                    src={v.user.pictureUrl ?? IcAvatar}
+                    className="max-w-[36px] rounded-full object-cover"
+                  />
+                  <div>{v.user.name}</div>
+                </div>
+                <div className="w-1/12">{mappingAction[v.action]}</div>
+                <div className="w-1/12">{v.type ? mappingType[v.type] : ''}</div>
+                <div className="w-1/6">{v.message}</div>
+                <div className="w-1/6">{v.attribute}</div>
+                <div className="w-1/6">{v.newValue}</div>
+                <div className="w-1/6">
+                  {format(new Date(v.createdAt ?? ''), 'yyyy-MM-dd HH:mm:ss')}
+                </div>
+              </div>
+              {i !== log.length - 1 && <div className="h-px bg-gray-300" />}
+            </div>
+          ))}
+        </div>
       </div>
       <div className="mt-4 flex justify-center">
         <Pagination
