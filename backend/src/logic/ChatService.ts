@@ -222,37 +222,6 @@ export class ChatService {
           logToSave: log,
         };
       }
-      // } else if (currentStage !== undefined && nextStage === undefined) {
-      //   // last stage
-      //   return {
-      //     status:'complete',
-      //     logToSave:null,
-      //     messageToSend:null
-      //   }
-      // const reply = this.getReplyOfStage(currentStage);
-      // if (reply?.type !== 'pass') return this.handleNotPassMessage(reply);
-      // else {
-      //   if (name === 'fire') this.user.fireStage = 'complete';
-      //   if (name === 'water') this.user.waterStage = 'complete';
-      //   if (name === 'earth') this.user.earthStage = 'complete';
-      //   if (name === 'air') this.user.airStage = 'complete';
-      //   if (name === 'aether') this.user.aetherStage = 'complete';
-
-      //   const log = new LogEntity();
-      //   log.user = this.user;
-      //   log.action = 'message';
-      //   log.message = this.message;
-      //   log.type = 'pass';
-      //   log.attribute = `${name}_stage`;
-      //   log.oldValue = currentStage.stage;
-      //   log.newValue = 'complete';
-
-      //   return {
-      //     status: 'complete',
-      //     messageToSend: reply.message ? toLineMessage(reply.message) : null,
-      //     logToSave: log,
-      //   };
-      // }
     } else return this.handleNotPassMessage();
   }
 
@@ -269,7 +238,7 @@ export class ChatService {
       this.config = await this.configService.getConfig();
 
       let userModified = false;
-      let logToSave: Log | null;
+      let logToSave: Log;
       let messageToSend: Message[] | null;
 
       // check status is in-game or not
