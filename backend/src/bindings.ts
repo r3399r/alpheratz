@@ -1,3 +1,4 @@
+import { S3 } from 'aws-sdk';
 import { Container } from 'inversify';
 import 'reflect-metadata';
 import { DbAccess } from './access/DbAccess';
@@ -29,5 +30,8 @@ container.bind<ChatService>(ChatService).toSelf();
 container.bind<ConfigService>(ConfigService).toSelf();
 container.bind<LogService>(LogService).toSelf();
 container.bind<UserService>(UserService).toSelf();
+
+// AWS
+container.bind<S3>(S3).toDynamicValue(() => new S3());
 
 export { container as bindings };

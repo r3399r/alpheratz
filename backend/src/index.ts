@@ -1,27 +1,39 @@
-import { WebhookRequestBody } from '@line/bot-sdk';
 import { LambdaContext, LambdaEvent } from 'src/model/Lambda';
-import { GetLogParams } from './model/api';
-import { HttpError } from './model/error/HttpError';
+import { DbAccess } from './access/DbAccess';
+import { bindings } from './bindings';
 import chat from './routes/chat';
 import config from './routes/config';
 import log from './routes/log';
 import user from './routes/user';
-import { errorOutput } from './util/lambdaHelper';
+import { errorOutput, successOutput } from './util/lambdaHelper';
 
 export const handler = async (event: LambdaEvent, _context?: LambdaContext) => {
-  console.log(event);
-  switch (event.resource) {
-    case '/api/chat':
-      if (event.body)
-        return await chat(JSON.parse(event.body) as WebhookRequestBody);
-      break;
-    case '/api/user':
-      return await user();
-    case '/api/log':
-      return await log(event.queryStringParameters as GetLogParams | null);
-    case '/api/config':
-      return await config();
-  }
+  let db: DbAccess | null = null;
+  try {
+    console.log(event);
+    db = bindings.get(DbAccess);
+    let res: any;
+    switch (event.resource) {
+      case '/api/chat':
+        res = await chat(event);
+        break;
+      case '/api/user':
+        res = await user(event);
+        break;
+      case '/api/log':
+        res = await log(event);
+        break;
+      case '/api/config':
+        res = await config(event);
+        break;
+    }
 
-  return errorOutput(new HttpError(400, 'Invalid resource'));
+    return successOutput(res);
+  } catch (e) {
+    console.log(e);
+
+    return errorOutput(e);
+  } finally {
+    await db?.cleanup();
+  }
 };

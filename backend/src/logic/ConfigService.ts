@@ -1,5 +1,5 @@
-import axios from 'axios';
-import { injectable } from 'inversify';
+import { S3 } from 'aws-sdk';
+import { inject, injectable } from 'inversify';
 import { Config } from 'src/model/Config';
 
 /**
@@ -7,11 +7,28 @@ import { Config } from 'src/model/Config';
  */
 @injectable()
 export class ConfigService {
-  public async getConfig() {
-    const res = await axios.get<Config>(
-      `https://${process.env.PROJECT}-${process.env.ENVR}.s3.ap-southeast-1.amazonaws.com/public/config.json`
-    );
+  @inject(S3)
+  private readonly s3!: S3;
 
-    return res.data;
+  public async getConfig(): Promise<Config> {
+    const res = await this.s3
+      .getObject({
+        Bucket: 'yue-public-bucket',
+        Key: `${process.env.PROJECT}-config.json`,
+      })
+      .promise();
+
+    return JSON.parse(res.Body?.toString('utf-8') ?? '{}') as Config;
+  }
+
+  public async setConfig(data: Config) {
+    await this.s3
+      .putObject({
+        Bucket: 'yue-public-bucket',
+        Key: `${process.env.PROJECT}-config.json`,
+        Body: JSON.stringify(data),
+        ContentType: 'application/json',
+      })
+      .promise();
   }
 }

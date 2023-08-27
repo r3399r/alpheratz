@@ -1,22 +1,16 @@
 import { bindings } from 'src/bindings';
 import { UserService } from 'src/logic/UserService';
-import { errorOutput, successOutput } from 'src/util/lambdaHelper';
+import { LambdaEvent } from 'src/model/Lambda';
 
-const user = async () => {
-  let service: UserService | null = null;
-  try {
-    service = bindings.get(UserService);
+const user = async (event: LambdaEvent) => {
+  const service = bindings.get(UserService);
 
-    const res = await service.getAllUsers();
-
-    return successOutput(res);
-  } catch (e) {
-    console.log(e);
-
-    return errorOutput(e);
-  } finally {
-    await service?.cleanup();
+  switch (event.httpMethod) {
+    case 'GET':
+      return await service.getAllUsers();
   }
+
+  throw new Error('unexpected httpMethod');
 };
 
 export default user;

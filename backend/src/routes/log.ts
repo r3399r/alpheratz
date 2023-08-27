@@ -1,23 +1,19 @@
 import { bindings } from 'src/bindings';
 import { LogService } from 'src/logic/LogService';
 import { GetLogParams } from 'src/model/api';
-import { errorOutput, successOutput } from 'src/util/lambdaHelper';
+import { LambdaEvent } from 'src/model/Lambda';
 
-const log = async (params: GetLogParams | null) => {
-  let service: LogService | null = null;
-  try {
-    service = bindings.get(LogService);
+const log = async (event: LambdaEvent) => {
+  const service = bindings.get(LogService);
 
-    const res = await service.getLogs(params);
-
-    return successOutput(res);
-  } catch (e) {
-    console.log(e);
-
-    return errorOutput(e);
-  } finally {
-    await service?.cleanup();
+  switch (event.httpMethod) {
+    case 'GET':
+      return await service.getLogs(
+        event.queryStringParameters as GetLogParams | null
+      );
   }
+
+  throw new Error('unexpected httpMethod');
 };
 
 export default log;

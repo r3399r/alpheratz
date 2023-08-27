@@ -31,6 +31,7 @@ Resources:
               - sts:AssumeRole
       RoleName: !Sub ${Project}-${TargetEnvr}-lambda-execution-role
       ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AmazonS3FullAccess
         - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
   ##############################################
   ##### RESTful API and associated Lambdas #####
@@ -130,6 +131,31 @@ Resources:
             },
             "/api/config": {
               "get": {
+                "produces": [
+                  "application/json"
+                ],
+                "responses": {
+                  "200": {
+                    "description": "200 response",
+                    "schema": {
+                      "$ref": "#/definitions/Empty"
+                    }
+                  }
+                },
+                "x-amazon-apigateway-integration": {
+                  "uri": !Sub "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:278497686406:function:${Project}-${TargetEnvr}-lambda/invocations",
+                  "responses": {
+                    "default": {
+                      "statusCode": "200"
+                    }
+                  },
+                  "passthroughBehavior": "when_no_match",
+                  "httpMethod": "POST",
+                  "contentHandling": "CONVERT_TO_TEXT",
+                  "type": "aws_proxy"
+                }
+              },
+              "put": {
                 "produces": [
                   "application/json"
                 ],

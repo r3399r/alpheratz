@@ -1,20 +1,23 @@
 import { bindings } from 'src/bindings';
 import { ConfigService } from 'src/logic/ConfigService';
-import { errorOutput, successOutput } from 'src/util/lambdaHelper';
+import { PutConfigRequest } from 'src/model/api';
+import { LambdaEvent } from 'src/model/Lambda';
 
-const config = async () => {
-  let service: ConfigService | null = null;
-  try {
-    service = bindings.get(ConfigService);
+const config = async (event: LambdaEvent) => {
+  const service = bindings.get(ConfigService);
 
-    const res = await service.getConfig();
+  switch (event.httpMethod) {
+    case 'GET':
+      return await service.getConfig();
+    case 'PUT':
+      if (!event.body) throw new Error('body should not be empty');
 
-    return successOutput(res);
-  } catch (e) {
-    console.log(e);
-
-    return errorOutput(e);
+      return await service.setConfig(
+        JSON.parse(event.body) as PutConfigRequest
+      );
   }
+
+  throw new Error('unexpected httpMethod');
 };
 
 export default config;

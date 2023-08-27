@@ -3,28 +3,20 @@ export type Message = {
   content: string;
 };
 
-export type Reply = PassReply | HintReply | FailReply;
+export type Reply = PassReply | NotPassReply;
 
 type PassReply = {
   type: 'pass';
   keyword: string;
-  message?: Message[];
 };
 
-type HintReply = {
-  type: 'hint';
-  keyword: string;
-  message: Message[];
-};
-
-type FailReply = {
-  type: 'fail';
+type NotPassReply = {
+  type: 'hint' | 'fail';
   keyword: string;
   message: Message[];
 };
 
 export type Stage = {
-  prevStage: string | null;
   stage: string;
   message: Message[];
   reply?: Reply[];

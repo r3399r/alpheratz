@@ -1,12 +1,12 @@
-import { Form } from '@rjsf/mui';
+import Form from '@rjsf/core';
 import { RJSFSchema, UiSchema } from '@rjsf/utils';
 import validator from '@rjsf/validator-ajv8';
 import { useEffect, useState } from 'react';
 import { Config } from 'src/model/backend/model/Config';
-import { getConfig } from 'src/service/configService';
+import { getConfig, setConfig } from 'src/service/configService';
 
-const MESSAGE: RJSFSchema = {
-  title: '關卡訊息設定',
+const MESSAGE = (title: string): RJSFSchema => ({
+  title,
   type: 'array',
   items: {
     title: '',
@@ -22,17 +22,9 @@ const MESSAGE: RJSFSchema = {
         type: 'string',
         title: '內容',
       },
-      // quickReply: {
-      //   title: '快速回覆',
-      //   type: 'array',
-      //   items: {
-      //     type: 'string',
-      //     title: '內容',
-      //   },
-      // },
     },
   },
-};
+});
 
 const STAGE = (title: string): RJSFSchema => ({
   title,
@@ -42,33 +34,48 @@ const STAGE = (title: string): RJSFSchema => ({
     type: 'object',
     required: ['stage'],
     properties: {
-      prevStage: {
-        type: ['string', 'null'],
-        title: '前一關卡名',
-      },
       stage: {
         type: 'string',
         title: '關卡名',
       },
-      message: MESSAGE,
+      message: MESSAGE('關卡訊息'),
       reply: {
         title: '關鍵字回覆設定',
         type: 'array',
         items: {
           title: '',
           type: 'object',
-          properties: {
-            type: {
-              type: 'string',
-              enum: ['pass', 'hint', 'fail'],
-              title: '類型',
+          oneOf: [
+            {
+              title: 'Option: 成功',
+              properties: {
+                type: {
+                  type: 'string',
+                  enum: ['pass'],
+                  title: '類型',
+                },
+                keyword: {
+                  type: 'string',
+                  title: '關鍵字',
+                },
+              },
             },
-            keyword: {
-              type: 'string',
-              title: '關鍵字',
+            {
+              title: 'Option: 提示或失敗',
+              properties: {
+                type: {
+                  type: 'string',
+                  enum: ['hint', 'fail'],
+                  title: '類型',
+                },
+                keyword: {
+                  type: 'string',
+                  title: '關鍵字',
+                },
+                message: MESSAGE('關鍵字回覆訊息'),
+              },
             },
-            message: MESSAGE,
-          },
+          ],
         },
       },
     },
@@ -128,7 +135,7 @@ const Editor = () => {
         formData={formData}
         onChange={(e) => setFormData(e.formData)}
         validator={validator}
-        onSubmit={(e) => console.log(e.formData)}
+        onSubmit={(e) => setConfig(e.formData)}
       />
     </div>
   );

@@ -1,6 +1,9 @@
-import { GetConfigResponse } from 'src/model/backend/model/api';
+import { GetConfigResponse, PutConfigRequest } from 'src/model/backend/model/api';
 import http from 'src/util/http';
 
 const getConfig = async () => await http.get<GetConfigResponse>('config');
 
-export default { getConfig };
+const putConfig = async (data: PutConfigRequest) =>
+  await http.put<void, PutConfigRequest>('config', { data });
+
+export default { getConfig, putConfig };

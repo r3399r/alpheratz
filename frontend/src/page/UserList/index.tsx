@@ -9,6 +9,7 @@ import {
 } from '@mui/material';
 import { format } from 'date-fns';
 import { ChangeEvent, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import IcAvatar from 'src/image/avatar.png';
 import { Log } from 'src/model/backend/model/entity/logEntity';
 import { User } from 'src/model/backend/model/entity/userEntity';
@@ -29,6 +30,7 @@ const mappingType = {
 const DEFAULT_LIMIT = 50;
 
 const UserList = () => {
+  const navigate = useNavigate();
   const [log, setLog] = useState<Log[]>();
   const [user, setUser] = useState<User[]>();
   const [selected, setSelected] = useState<string>('');
@@ -74,36 +76,41 @@ const UserList = () => {
 
   return (
     <div className="m-4">
-      <div className="flex items-center gap-4">
-        <div className="w-[300px]">
-          <FormControl fullWidth>
-            <InputLabel id="demo-simple-select-label">玩家</InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              value={selected}
-              label="玩家"
-              onChange={handleChange}
-            >
-              {user.map((v) => (
-                <MenuItem key={v.id} value={v.id}>
-                  <div className="flex items-center gap-2">
-                    <img
-                      src={v.pictureUrl ?? IcAvatar}
-                      className="max-w-[24px] rounded-full object-cover"
-                    />
-                    <div>{v.name}</div>
-                  </div>
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-4">
+          <div className="w-[300px]">
+            <FormControl fullWidth>
+              <InputLabel id="demo-simple-select-label">玩家</InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={selected}
+                label="玩家"
+                onChange={handleChange}
+              >
+                {user.map((v) => (
+                  <MenuItem key={v.id} value={v.id}>
+                    <div className="flex items-center gap-2">
+                      <img
+                        src={v.pictureUrl ?? IcAvatar}
+                        className="max-w-[24px] rounded-full object-cover"
+                      />
+                      <div>{v.name}</div>
+                    </div>
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </div>
+          <div>
+            <Button variant="outlined" onClick={onReset}>
+              Reset
+            </Button>
+          </div>
         </div>
-        <div>
-          <Button variant="outlined" onClick={onReset}>
-            Reset
-          </Button>
-        </div>
+        <Button variant="contained" onClick={() => navigate('/editor')}>
+          編輯關卡
+        </Button>
       </div>
       <div className="mt-4 rounded bg-red-50/60">
         <div className="flex items-center gap-2 p-2 font-bold">

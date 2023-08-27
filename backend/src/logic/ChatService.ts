@@ -3,12 +3,12 @@ import { inject, injectable } from 'inversify';
 import { DbAccess } from 'src/access/DbAccess';
 import { LogAccess } from 'src/access/LogAccess';
 import { UserAccess } from 'src/access/UserAccess';
-import { config } from 'src/constant/config';
 import { HandledItem } from 'src/model/Chat';
-import { Reply, Stage } from 'src/model/Config';
+import { Config, Reply, Stage } from 'src/model/Config';
 import { Log, LogEntity } from 'src/model/entity/logEntity';
 import { User, UserEntity } from 'src/model/entity/userEntity';
 import { toLineMessage } from 'src/util/ConfigHelper';
+import { ConfigService } from './ConfigService';
 
 /**
  * Service class for Chat
@@ -27,18 +27,19 @@ export class ChatService {
   @inject(Client)
   private readonly client!: Client;
 
+  @inject(ConfigService)
+  private readonly configService!: ConfigService;
+
   private user!: User;
   private message!: string;
-
-  public async cleanup() {
-    await this.dbAccess.cleanup();
-  }
+  private config!: Config;
 
   public async receiveFollow(userId: string, replyToken: string) {
     try {
       await this.dbAccess.startTransaction();
+      this.config = await this.configService.getConfig();
 
-      const firstStage = config.main.find((v) => v.prevStage === null);
+      const firstStage = this.config.main.at(0);
       if (firstStage === undefined) throw new Error('first stage not found');
 
       const profile = await this.client.getProfile(userId);
@@ -164,8 +165,10 @@ export class ChatService {
       air: '風',
       aether: '乙太',
     };
-    const currentStage = config[name].find((v) => v.stage === stage);
-    const nextStage = config[name].find((v) => v.prevStage === stage);
+    const currentIndex = this.config[name].findIndex((v) => v.stage === stage);
+    const currentStage =
+      currentIndex >= 0 ? this.config[name].at(currentIndex) : undefined;
+    const nextStage = this.config[name].at(currentIndex + 1);
 
     if (
       currentStage === undefined &&
@@ -213,37 +216,43 @@ export class ChatService {
         log.newValue = nextStage.stage;
 
         return {
-          status: 'pass',
+          status:
+            currentIndex + 2 === this.config[name].length ? 'complete' : 'pass',
           messageToSend: toLineMessage(nextStage.message),
           logToSave: log,
         };
       }
-    } else if (currentStage !== undefined && nextStage === undefined) {
-      // last stage
-      const reply = this.getReplyOfStage(currentStage);
-      if (reply?.type !== 'pass') return this.handleNotPassMessage(reply);
-      else {
-        if (name === 'fire') this.user.fireStage = 'complete';
-        if (name === 'water') this.user.waterStage = 'complete';
-        if (name === 'earth') this.user.earthStage = 'complete';
-        if (name === 'air') this.user.airStage = 'complete';
-        if (name === 'aether') this.user.aetherStage = 'complete';
+      // } else if (currentStage !== undefined && nextStage === undefined) {
+      //   // last stage
+      //   return {
+      //     status:'complete',
+      //     logToSave:null,
+      //     messageToSend:null
+      //   }
+      // const reply = this.getReplyOfStage(currentStage);
+      // if (reply?.type !== 'pass') return this.handleNotPassMessage(reply);
+      // else {
+      //   if (name === 'fire') this.user.fireStage = 'complete';
+      //   if (name === 'water') this.user.waterStage = 'complete';
+      //   if (name === 'earth') this.user.earthStage = 'complete';
+      //   if (name === 'air') this.user.airStage = 'complete';
+      //   if (name === 'aether') this.user.aetherStage = 'complete';
 
-        const log = new LogEntity();
-        log.user = this.user;
-        log.action = 'message';
-        log.message = this.message;
-        log.type = 'pass';
-        log.attribute = `${name}_stage`;
-        log.oldValue = currentStage.stage;
-        log.newValue = 'complete';
+      //   const log = new LogEntity();
+      //   log.user = this.user;
+      //   log.action = 'message';
+      //   log.message = this.message;
+      //   log.type = 'pass';
+      //   log.attribute = `${name}_stage`;
+      //   log.oldValue = currentStage.stage;
+      //   log.newValue = 'complete';
 
-        return {
-          status: 'complete',
-          messageToSend: reply.message ? toLineMessage(reply.message) : null,
-          logToSave: log,
-        };
-      }
+      //   return {
+      //     status: 'complete',
+      //     messageToSend: reply.message ? toLineMessage(reply.message) : null,
+      //     logToSave: log,
+      //   };
+      // }
     } else return this.handleNotPassMessage();
   }
 
@@ -257,15 +266,19 @@ export class ChatService {
       if (eventMessage.type !== 'text') return;
       this.message = eventMessage.text.toLowerCase();
       this.user = await this.userAccess.findOneById(userId);
+      this.config = await this.configService.getConfig();
 
       let userModified = false;
-      let logToSave: Log;
+      let logToSave: Log | null;
       let messageToSend: Message[] | null;
 
       // check status is in-game or not
       const mainStage = this.user.mainStage;
-      const currentMainStage = config.main.find((v) => v.stage === mainStage);
-      const nextMainStage = config.main.find((v) => v.prevStage === mainStage);
+      const currentIndex = this.config.main.findIndex(
+        (v) => v.stage === mainStage
+      );
+      const currentMainStage = this.config.main.at(currentIndex);
+      const nextMainStage = this.config.main.at(currentIndex + 1);
       if (currentMainStage === undefined || nextMainStage === undefined)
         throw new Error('unexpected main stage result');
 
@@ -284,27 +297,27 @@ export class ChatService {
         const airStage = this.user.airStage;
         const aetherStage = this.user.aetherStage;
 
-        if (fireStage !== 'complete') {
+        if (fireStage !== this.config.fire.at(-1)?.stage) {
           const item = this.handleMinorStages('fire', fireStage);
           if (item.status !== 'complete') incompleteStages += 1;
           handledItems.push(item);
         }
-        if (waterStage !== 'complete') {
+        if (waterStage !== this.config.water.at(-1)?.stage) {
           const item = this.handleMinorStages('water', waterStage);
           if (item.status !== 'complete') incompleteStages += 1;
           handledItems.push(item);
         }
-        if (earthStage !== 'complete') {
+        if (earthStage !== this.config.earth.at(-1)?.stage) {
           const item = this.handleMinorStages('earth', earthStage);
           if (item.status !== 'complete') incompleteStages += 1;
           handledItems.push(item);
         }
-        if (airStage !== 'complete') {
+        if (airStage !== this.config.air.at(-1)?.stage) {
           const item = this.handleMinorStages('air', airStage);
           if (item.status !== 'complete') incompleteStages += 1;
           handledItems.push(item);
         }
-        if (aetherStage !== 'complete') {
+        if (aetherStage !== this.config.aether.at(-1)?.stage) {
           const item = this.handleMinorStages('aether', aetherStage);
           if (item.status !== 'complete') incompleteStages += 1;
           handledItems.push(item);
