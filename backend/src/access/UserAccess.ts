@@ -28,7 +28,7 @@ export class UserAccess {
   public async findOne(options: FindOneOptions<User>) {
     const qr = await this.database.getQueryRunner();
 
-    return await qr.manager.findOneOrFail<User>(UserEntity.name, options);
+    return await qr.manager.findOne<User>(UserEntity.name, options);
   }
 
   public async findOneById(id: string) {

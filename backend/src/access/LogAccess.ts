@@ -23,15 +23,16 @@ export class LogAccess {
     const qr = await this.database.getQueryRunner();
 
     return await qr.manager.find<Log>(LogEntity.name, {
-      relations: { user: true },
+      relations: { user: true, message: true },
       ...options,
     });
   }
+
   public async findAndCount(options?: FindManyOptions<Log>) {
     const qr = await this.database.getQueryRunner();
 
     return await qr.manager.findAndCount<Log>(LogEntity.name, {
-      relations: { user: true },
+      relations: { user: true, message: true },
       ...options,
     });
   }

@@ -1,27 +1,24 @@
-import { BeforeInsert, BeforeUpdate, Column, Entity } from 'typeorm';
+import { BeforeInsert, BeforeUpdate, Column, Entity, Generated } from 'typeorm';
 
-export type User = {
+export type Message = {
   id: string;
-  name: string;
-  pictureUrl: string | null;
-  isFollow: boolean;
+  message: string;
+  type: string;
   createdAt: string | null;
   updatedAt: string | null;
 };
 
-@Entity({ name: 'user' })
-export class UserEntity implements User {
-  @Column({ primary: true, type: 'text' })
+@Entity({ name: 'message' })
+export class MessageEntity implements Message {
+  @Column({ primary: true })
+  @Generated('uuid')
   id!: string;
 
   @Column({ type: 'text' })
-  name!: string;
+  message!: string;
 
-  @Column({ type: 'text', name: 'picture_url', default: null })
-  pictureUrl: string | null = null;
-
-  @Column({ type: 'boolean', name: 'is_follow' })
-  isFollow!: boolean;
+  @Column({ type: 'text' })
+  type!: string;
 
   @Column({ type: 'timestamp', name: 'created_at', default: null })
   createdAt!: string;

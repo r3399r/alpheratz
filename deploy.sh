@@ -3,13 +3,10 @@ set -e
 
 env=test
 project=alpheratz
-# subDomain=wedding
-# domain=celestialstudio.net
 
 echo ====================================================================================
 echo env: $env
 echo project: $project
-# echo domain: $subDomain.$domain
 echo ====================================================================================
 
 echo deploy backend AWS...
@@ -31,7 +28,6 @@ echo ===========================================================================
 
 echo deploy frontend to S3...
 cd ../frontend
-# export liff=$(aws ssm get-parameter --name $project-$env-liff | jq .Parameter.Value | sed -e 's/^"//' -e 's/"$//')
 npm install
 npm run build
 mkdir -p ./dist/image

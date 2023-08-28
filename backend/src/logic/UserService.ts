@@ -11,6 +11,6 @@ export class UserService {
   private readonly userAccess!: UserAccess;
 
   public async getAllUsers(): Promise<GetUserResponse> {
-    return await this.userAccess.find({ where: { follow: true } });
+    return await this.userAccess.find({ where: { isFollow: true } });
   }
 }

@@ -1,4 +1,5 @@
 import chatEndpoint from 'src/api/chatEndpoint';
+import messageEndpoint from 'src/api/messageEndpoint';
 import userEndpoint from 'src/api/userEndpoint';
 import { GetLogParams } from 'src/model/backend/model/api';
 import { dispatch } from 'src/redux/store';
@@ -27,4 +28,10 @@ export const getLog = async (params: GetLogParams) => {
   } finally {
     dispatch(finishWaiting());
   }
+};
+
+export const updateType = async (messageId: string, type: string) => {
+  await messageEndpoint.putMessageIdType(messageId, {
+    type,
+  });
 };

@@ -2,8 +2,8 @@ import { LambdaContext, LambdaEvent } from 'src/model/Lambda';
 import { DbAccess } from './access/DbAccess';
 import { bindings } from './bindings';
 import chat from './routes/chat';
-import config from './routes/config';
 import log from './routes/log';
+import message from './routes/message';
 import user from './routes/user';
 import { errorOutput, successOutput } from './util/lambdaHelper';
 
@@ -13,18 +13,20 @@ export const handler = async (event: LambdaEvent, _context?: LambdaContext) => {
     console.log(event);
     db = bindings.get(DbAccess);
     let res: any;
-    switch (event.resource) {
-      case '/api/chat':
+
+    const category = event.resource.split('/')[2];
+    switch (category) {
+      case 'chat':
         res = await chat(event);
         break;
-      case '/api/user':
+      case 'user':
         res = await user(event);
         break;
-      case '/api/log':
+      case 'log':
         res = await log(event);
         break;
-      case '/api/config':
-        res = await config(event);
+      case 'message':
+        res = await message(event);
         break;
     }
 

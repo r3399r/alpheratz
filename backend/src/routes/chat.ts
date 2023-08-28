@@ -18,17 +18,13 @@ const chat = async (event: LambdaEvent) => {
     if (event.source.type !== 'user') throw new Error('unexpected source type');
     switch (event.type) {
       case 'follow':
-        await service.receiveFollow(event.source.userId, event.replyToken);
+        await service.receiveFollow(event.source.userId);
         break;
       case 'unfollow':
         await service.receiveUnfollow(event.source.userId);
         break;
       case 'message':
-        await service.receiveMessage(
-          event.message,
-          event.source.userId,
-          event.replyToken
-        );
+        await service.receiveMessage(event.message, event.source.userId);
         break;
     }
   }
